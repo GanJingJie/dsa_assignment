@@ -127,7 +127,15 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="asg_classes.cpp" />
     <ClCompile Include="dsa_asg.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="asg_classes.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <Text Include="Passwords.txt" />
+    <Text Include="Usernames.txt" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
