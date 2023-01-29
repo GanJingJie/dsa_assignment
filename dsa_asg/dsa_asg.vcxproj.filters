@@ -28,10 +28,10 @@
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <Text Include="Usernames.txt">
+    <Text Include="Passwords.txt">
       <Filter>Source Files</Filter>
     </Text>
-    <Text Include="Passwords.txt">
+    <Text Include="Usernames.txt">
       <Filter>Source Files</Filter>
     </Text>
   </ItemGroup>

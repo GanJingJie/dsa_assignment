@@ -5,74 +5,100 @@ using namespace std;
 
 void Register();
 void logIn();
-void passwordCheck();
 
-int opt, lineNo = 0;
+int opt, lineNo = 0, i = 0;
 string username, password, fileName, existingUser, Password;
-bool same = true;
+bool same = true, success = true;
 ofstream write;
 ifstream read;
 
-void pWord() {
-    cout << "Please enter your password: ";
-    cin >> password;
-    passwordCheck();
-}
+void ForumPage() {
+    cout << "------------ MENU ------------" << endl;
+    cout << "1. Create Topic" << endl;
+    cout << "2. View Topics" << endl;
+    cout << "3. Log Out" << endl;
+    cout << "------------------------------" << endl;
+    cout << "Your choice: ";
+    cin >> opt;
+    cin.ignore(numeric_limits<streamsize>::max(), '\n');
 
-void passwordCheck() {
-    read.open("Passwords.txt");
-    for (int i = 0; i < lineNo; i++) {
-        if (i == lineNo) {
-            getline(read, Password);
-            if (password == Password) {
-                cout << "Log In Successful!" << endl;
-                // ForumPage();
-            }
-
-            else
-            {
-                bool yes = true;
-                while (yes) {
-                    cout << "Incorrect Pin!" << endl;
-                    cout << "--------- Options ---------" << endl;
-                    cout << "1. Retype username \n2. Retype password \n3. Register User" << endl;
-                    cout << "---------------------------";
-                    cin >> opt;
-                    cin.ignore(numeric_limits<streamsize>::max(), '\n');
-
-                    if (opt == 1) {
-                        yes = false;
-                        logIn();
-                    }
-                    else if (opt == 2) {
-                        yes = false;
-                        pWord();
-                    }
-                    else if (opt == 3) {
-                        yes = false;
-                        Register();
-                    }
-                    else {
-                        cout << "Please enter a valid option!" << endl;
-                    }
-                }
-            }
-        }
+    if (opt == 1) {
+        // createTopic();
     }
-    read.close();
+
+    else if (opt == 2) {
+        // viewTopic();
+    }
+
+    else if (opt == 3){
+        username = "";
+        password = "";
+        cout << "Log out successful!" << endl;
+        main();
+    }
+
 }
 
-int logInCheck() {
+void logInCheck() {
+    fileName = "Usernames.txt";
     read.open(fileName);
-    cout << fileName << "\n";
     while (!read.eof()) {
         getline(read, existingUser);
-        cout << existingUser;
+        read.close();
+
+        // check if username exists
         if (username != existingUser) {
             lineNo++;
         }
+
+        // if username exists
         else if (username == existingUser) {
-            pWord();
+            cout << "Please enter your password: ";
+            cin >> password;
+
+            read.open("Passwords.txt");
+            while (!read.eof()) {
+                if (i == lineNo) {
+                    getline(read, Password);
+                    if (password == Password) {
+                        cout << "Log In Successful!" << endl;
+                        ForumPage();
+                    }
+
+                    else
+                    {
+                        bool yes = true;
+                        while (yes) {
+                            cout << "Incorrect Pin!" << endl;
+                            cout << "------------ Options ------------" << endl;
+                            cout << "1. Retype username \n2. Retype password \n3. Register User" << endl;
+                            cout << "---------------------------------";
+                            cin >> opt;
+                            cin.ignore(numeric_limits<streamsize>::max(), '\n');
+
+                            if (opt == 1) {
+                                yes = false;
+                                logIn();
+                            }
+                            else if (opt == 2) {
+                                yes = false;
+                                logInCheck();
+                            }
+                            else if (opt == 3) {
+                                yes = false;
+                                Register();
+                            }
+                            else {
+                                cout << "Please enter a valid option!" << endl;
+                            }
+                        }
+                    }
+                }
+
+                else {
+                    i++;
+                }
+            }
             read.close();
         }
         else
@@ -82,7 +108,6 @@ int logInCheck() {
         }
     }
 
-    return lineNo;
 }
 
 void logIn() {
@@ -91,9 +116,7 @@ void logIn() {
     logInCheck();
 }
 
-void RegisterCheck() {
-
-    // Opening file to check if it exists
+void RegisterCheck(string fileName) {
     read.open(fileName);
     while (!read.eof()) {
         getline(read, existingUser);
@@ -107,11 +130,19 @@ void RegisterCheck() {
 
 void Register() {
     while (same) {
+        fileName = "Usernames.txt";
         cout << "Please enter a username: ";
         cin >> username;
+
+        // Opening file to check if it exists
+        RegisterCheck(fileName);
+
         cout << "Please enter a password: ";
         cin >> password;
-        fileName = "Usernames.txt";
+        if (password.length() < 8) {
+            cout << "Your password must be more than 8 characters long!" << endl;
+            continue;
+        }
 
         if (username == password) {
             cout << "Your password cannot be the same as your username!" << endl;
@@ -119,7 +150,6 @@ void Register() {
 
         else {
             same = false;
-            RegisterCheck(); // checking if username exists
 
             // writing username to file "Usernames.txt"
             write.open(fileName);
@@ -130,6 +160,8 @@ void Register() {
             write.open("Passwords.txt");
             write << password << endl;
             write.close();
+
+            cout << "User registered successfully!" << endl << endl;
         }
     }
 }
