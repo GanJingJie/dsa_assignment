@@ -18,12 +18,12 @@
     <ClCompile Include="dsa_asg.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="asg_classes.cpp">
+    <ClCompile Include="firstMenu.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="asg_classes.h">
+    <ClInclude Include="firstMenu.h">
       <Filter>Source Files</Filter>
     </ClInclude>
   </ItemGroup>

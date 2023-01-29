@@ -1,122 +1,121 @@
 #include <iostream>
 #include <string>
 #include <fstream>
+#include <stdlib.h>
 using namespace std;
 
+void getPassword();
 void Register();
 void logIn();
 int main();
 
-int opt, lineNo = 0, i = 0, choice;
-string username, password, fileName, existingUser, Password, topicName;
+int opt, lineNo = 1, i = 0, choice;
+string username, password, fileName, existingUser, Password;
 bool same = true, success = true, yes = true;
 ofstream write;
 ifstream read;
 
 void createTopic() {
-    cout << "Enter topic name: " << endl;
+    string topicName;
+    string post;
+    cout << "Enter topic name: ";
     getline(cin, topicName);
 
-
+    cout << "What would you like to type: ";
+    getline(cin, post);
 }
 
 void ForumPage() {
-    cout << "------------ MENU ------------" << endl;
-    cout << "1. Create Topic" << endl;
-    cout << "2. View Topics" << endl;
-    cout << "3. Log Out" << endl;
-    cout << "------------------------------" << endl;
-    cout << "Your choice: ";
-    cin >> choice;
-    cin.ignore(numeric_limits<streamsize>::max(), '\n');
+    bool success = true;
+    while (success){
+        cout << "------------ MENU ------------" << endl;
+        cout << "1. Create Topic" << endl;
+        cout << "2. View Topics" << endl;
+        cout << "3. Log Out" << endl;
+        cout << "------------------------------" << endl;
+        cout << "Your choice: ";
+        cin >> choice;
+        cin.ignore(numeric_limits<streamsize>::max(), '\n');
 
-    if (choice == 1) {
-        createTopic();
+        if (choice == 1) {
+            createTopic();
+        }
+
+        else if (choice == 2) {
+            // viewTopic();
+        }
+
+        else if (choice == 3){
+            username = "";
+            password = "";
+            success = false;
+            cout << "Log out successful!" << endl;
+            main();
+        }
     }
+}
 
-    else if (choice == 2) {
-        // viewTopic();
-    }
-
-    else if (choice == 3){
-        username = "";
-        password = "";
-        cout << "Log out successful!" << endl;
-        main();
-    }
-
+void loginSuccessful() {
+    cout << "Log In Successful!" << endl << endl;
+    ForumPage();
 }
 
 void logInCheck() {
     fileName = "Usernames.txt";
     read.open(fileName);
+    bool success = 0;
+
     while (!read.eof()) {
         getline(read, existingUser);
-        read.close();
-
-        // check if username exists
         if (username != existingUser) {
             lineNo++;
+            cout << lineNo;
         }
-
-        // if username exists
-        else if (username == existingUser) {
-            cout << "Please enter your password: ";
-            cin >> password;
-
-            read.open("Passwords.txt");
-            while (!read.eof()) {
-                if (i == lineNo) {
-                    getline(read, Password);
-                    if (password == Password) {
-                        cout << "Log In Successful!" << endl << endl;
-                        ForumPage();
-                    }
-
-                    else
-                    {
-                        bool ye = true;
-                        while (ye) {
-                            cout << "Incorrect Pin!" << endl;
-                            cout << "------------ Options ------------" << endl;
-                            cout << "1. Retype username \n2. Retype password \n3. Register User" << endl;
-                            cout << "---------------------------------" << endl;
-                            cout << "Your choice: ";
-                            cin >> opt;
-                            cin.ignore(numeric_limits<streamsize>::max(), '\n');
-
-                            if (opt == 1) {
-                                ye = false;
-                                logIn();
-                            }
-                            else if (opt == 2) {
-                                ye = false;
-                                logInCheck();
-                            }
-                            else if (opt == 3) {
-                                ye = false;
-                                Register();
-                            }
-                            else {
-                                cout << "Please enter a valid option!" << endl;
-                            }
-                        }
-                    }
-                }
-
-                else {
-                    i++;
-                }
-            }
-            read.close();
-        }
-        else
-        {
-            cout << "Username not found" << endl;
-            logIn();
+        else {
+            success = 1;
+            break;
         }
     }
 
+    read.close();
+
+    if (success) {
+        int passwordTries = 3;
+        bool loggedIn = 0;
+        while (passwordTries > 0) {
+            cout << "Please enter your password: ";
+            cin >> password;
+
+            getPassword();
+            if (password == Password) {
+                loggedIn = 1;
+                passwordTries = 0;
+                loginSuccessful();
+            }
+            else {
+                cout << "Incorrect Password!" << endl;
+                passwordTries--;
+            }
+        }
+
+        if (passwordTries >= 0) {
+            cout << "You have enter the incorrect password 3 times. You will be logged out." << endl;
+            exit;
+        }
+    }
+    else {
+        cout << "Username does not exist." << endl;
+    }
+}
+
+void getPassword() {
+    read.open("Passwords.txt");
+    while (lineNo > 1) {
+        read.eof();
+        lineNo--;
+    }
+    getline(read, Password);
+    read.close();
 }
 
 void logIn() {
@@ -137,6 +136,7 @@ void Register() {
             getline(read, existingUser);
             if (username == existingUser) {
                 cout << "Username already exists!" << endl;
+                break;
             }
             else
             {
@@ -172,6 +172,7 @@ void Register() {
             write.close();
 
             cout << "User registered successfully!" << endl << endl;
+
         }
     }
 }
@@ -195,14 +196,16 @@ int main()
 
         if (opt == 1) {
             Register();
+            opt = 0;
         }
 
         else if (opt == 2) {
             logIn();
+            opt = 0;
         }
 
         else if (opt == 3) {
-            break;
+            exit;
         }
 
         else {
@@ -212,4 +215,3 @@ int main()
 
     while (opt != 0);
 }
-

@@ -5,6 +5,8 @@ using namespace std;
 
 class asg_classes
 {
-private:
+public:
+	void Register();
+
 };
 
