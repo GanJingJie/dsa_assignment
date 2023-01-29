@@ -5,12 +5,20 @@ using namespace std;
 
 void Register();
 void logIn();
+int main();
 
-int opt, lineNo = 0, i = 0;
-string username, password, fileName, existingUser, Password;
-bool same = true, success = true;
+int opt, lineNo = 0, i = 0, choice;
+string username, password, fileName, existingUser, Password, topicName;
+bool same = true, success = true, yes = true;
 ofstream write;
 ifstream read;
+
+void createTopic() {
+    cout << "Enter topic name: " << endl;
+    getline(cin, topicName);
+
+
+}
 
 void ForumPage() {
     cout << "------------ MENU ------------" << endl;
@@ -19,18 +27,18 @@ void ForumPage() {
     cout << "3. Log Out" << endl;
     cout << "------------------------------" << endl;
     cout << "Your choice: ";
-    cin >> opt;
+    cin >> choice;
     cin.ignore(numeric_limits<streamsize>::max(), '\n');
 
-    if (opt == 1) {
-        // createTopic();
+    if (choice == 1) {
+        createTopic();
     }
 
-    else if (opt == 2) {
+    else if (choice == 2) {
         // viewTopic();
     }
 
-    else if (opt == 3){
+    else if (choice == 3){
         username = "";
         password = "";
         cout << "Log out successful!" << endl;
@@ -61,31 +69,32 @@ void logInCheck() {
                 if (i == lineNo) {
                     getline(read, Password);
                     if (password == Password) {
-                        cout << "Log In Successful!" << endl;
+                        cout << "Log In Successful!" << endl << endl;
                         ForumPage();
                     }
 
                     else
                     {
-                        bool yes = true;
-                        while (yes) {
+                        bool ye = true;
+                        while (ye) {
                             cout << "Incorrect Pin!" << endl;
                             cout << "------------ Options ------------" << endl;
                             cout << "1. Retype username \n2. Retype password \n3. Register User" << endl;
-                            cout << "---------------------------------";
+                            cout << "---------------------------------" << endl;
+                            cout << "Your choice: ";
                             cin >> opt;
                             cin.ignore(numeric_limits<streamsize>::max(), '\n');
 
                             if (opt == 1) {
-                                yes = false;
+                                ye = false;
                                 logIn();
                             }
                             else if (opt == 2) {
-                                yes = false;
+                                ye = false;
                                 logInCheck();
                             }
                             else if (opt == 3) {
-                                yes = false;
+                                ye = false;
                                 Register();
                             }
                             else {
@@ -116,18 +125,6 @@ void logIn() {
     logInCheck();
 }
 
-void RegisterCheck(string fileName) {
-    read.open(fileName);
-    while (!read.eof()) {
-        getline(read, existingUser);
-        if (username == existingUser) {
-            cout << "Username already exists!" << endl;
-            Register();
-        }
-    }
-    read.close();
-}
-
 void Register() {
     while (same) {
         fileName = "Usernames.txt";
@@ -135,8 +132,21 @@ void Register() {
         cin >> username;
 
         // Opening file to check if it exists
-        RegisterCheck(fileName);
+        read.open(fileName);
+        while (!read.eof()) {
+            getline(read, existingUser);
+            if (username == existingUser) {
+                cout << "Username already exists!" << endl;
+            }
+            else
+            {
+                same = false;
+            }
+        }
+        read.close();
+    }
 
+    while (yes) {
         cout << "Please enter a password: ";
         cin >> password;
         if (password.length() < 8) {
@@ -144,12 +154,12 @@ void Register() {
             continue;
         }
 
-        if (username == password) {
+        else if (username == password) {
             cout << "Your password cannot be the same as your username!" << endl;
         }
 
         else {
-            same = false;
+            yes = false;
 
             // writing username to file "Usernames.txt"
             write.open(fileName);
