@@ -41,12 +41,13 @@ int Dictionary::hash(KeyType key)
 	return strvalue;
 }
 
-bool Dictionary::add(KeyType nKey, ItemType nItem)
+bool Dictionary::add(KeyType nKey, ItemType nUser, ItemType nItem)
 {
 	int value = hash(nKey);
 	if (items[value] == NULL)
 	{
 		Node* newNode = new Node();
+		newNode->user = nUser;
 		newNode->item = nItem;
 		newNode->next = NULL;
 
@@ -72,6 +73,7 @@ bool Dictionary::add(KeyType nKey, ItemType nItem)
 		}
 
 		Node* newNode = new Node();
+		newNode->user = nUser;
 		newNode->item = nItem;
 		newNode->key = nKey;
 		items[value] = newNode;
@@ -115,11 +117,13 @@ int Dictionary::getLength()
 
 void Dictionary::print()
 {
+	int count = 1;
 	for (int i = 0; i < max_size; i++)
 	{
 		if (items[i] != NULL)
 		{
-			cout << items[i]->key << ": " << items[i]->item << endl;
+			cout << count << ". " << items[i]->key << endl;
+			count++;
 		}
 	}
 }

@@ -8,7 +8,8 @@ typedef string KeyType;
 
 struct Node
 {
-	KeyType  key;   
+	KeyType  key;
+	ItemType user;
 	ItemType item;
 	Node* next;
 };
@@ -25,7 +26,7 @@ public:
 	~Dictionary();
 
 	int hash(KeyType key);
-	bool add(KeyType newKey, ItemType newItem);
+	bool add(KeyType newKey, ItemType user, ItemType newItem);
 	void remove(KeyType key);
 	ItemType get(KeyType key);
 	bool isEmpty();

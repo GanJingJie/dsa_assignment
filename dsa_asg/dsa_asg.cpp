@@ -10,51 +10,70 @@ void Register();
 void logIn();
 int main();
 
-int opt, lineNo = 1, i = 0, choice;
+int lineNo = 1;
 string username, password, fileName, existingUser, Password;
-bool same = true, success = true, yes = true;
 ofstream write;
 ifstream read;
 Dictionary topicList;
 
-void createTopic() {
+void createPost() {
+
+}
+
+void createTopic(string username) {
     string topicName;
     string post;
 
     cout << "Enter topic name: ";
     getline(cin, topicName);
-    
 
     cout << "What would you like to type: ";
     getline(cin, post);
-    topicList.add(topicName, post);
+    while (!topicList.isEmpty()) {
+        if (/*check if topic name == topicName*/) {
+            cout << "Topic already Exists!" << endl;
+        }
+
+        else{
+            topicList.add(topicName, username, post);
+        }
+    }
 }
 
-void viewTopic() {
-    
+void viewTopics() {
+    int choice = 0;
+    cout << "----------- TOPICS -----------" << endl;
+    topicList.print();
+    cout << "------------------------------" << endl;
 }
 
-void ForumPage() {
+void ForumPage(string username) {
     bool success = true;
+    int choice = 0;
     while (success){
         cout << "------------ MENU ------------" << endl;
         cout << "1. Create Topic" << endl;
         cout << "2. View Topics" << endl;
-        cout << "3. Log Out" << endl;
+        cout << "3. Create Post" << endl;
+        cout << "0. Log Out" << endl;
         cout << "------------------------------" << endl;
         cout << "Your choice: ";
         cin >> choice;
         cin.ignore(numeric_limits<streamsize>::max(), '\n');
 
         if (choice == 1) {
-            createTopic();
+            createTopic(username);
         }
 
         else if (choice == 2) {
-            viewTopic();
+            viewTopics();
         }
 
-        else if (choice == 3){
+        else if (choice == 3) {
+            //createPost();
+        }
+
+        else if (choice == 0){
             username = "";
             password = "";
             success = false;
@@ -66,7 +85,7 @@ void ForumPage() {
 
 void loginSuccessful() {
     cout << "Log In Successful!" << endl << endl;
-    ForumPage();
+    ForumPage(username);
 }
 
 void logInCheck() {
@@ -134,6 +153,7 @@ void logIn() {
 }
 
 void Register() {
+    bool same = true;
     while (same) {
         fileName = "Usernames.txt";
         cout << "Please enter a username: ";
@@ -155,6 +175,7 @@ void Register() {
         read.close();
     }
 
+    bool yes = true;
     while (yes) {
         cout << "Please enter a password: ";
         cin >> password;
@@ -171,12 +192,12 @@ void Register() {
             yes = false;
 
             // writing username to file "Usernames.txt"
-            write.open(fileName);
+            write.open(fileName, ios_base::app);
             write << username << endl;
             write.close();
 
             // writing password to file "Passwords.txt"
-            write.open("Passwords.txt");
+            write.open("Passwords.txt", ios_base::app);
             write << password << endl;
             write.close();
 
