@@ -2,6 +2,7 @@
 #include <string>
 #include <fstream>
 #include <stdlib.h>
+#include "Dictionary.h"
 using namespace std;
 
 void getPassword();
@@ -14,15 +15,22 @@ string username, password, fileName, existingUser, Password;
 bool same = true, success = true, yes = true;
 ofstream write;
 ifstream read;
+Dictionary topicList;
 
 void createTopic() {
     string topicName;
     string post;
+
     cout << "Enter topic name: ";
     getline(cin, topicName);
+    topicList.add();
 
     cout << "What would you like to type: ";
-    getline(cin, post);
+    getline(cin, post);;
+}
+
+void viewTopic() {
+    
 }
 
 void ForumPage() {
@@ -42,7 +50,7 @@ void ForumPage() {
         }
 
         else if (choice == 2) {
-            // viewTopic();
+            viewTopic();
         }
 
         else if (choice == 3){

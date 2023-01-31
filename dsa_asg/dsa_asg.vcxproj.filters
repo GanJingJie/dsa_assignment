@@ -18,14 +18,9 @@
     <ClCompile Include="dsa_asg.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="firstMenu.cpp">
+    <ClCompile Include="Dictionary.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-  </ItemGroup>
-  <ItemGroup>
-    <ClInclude Include="firstMenu.h">
-      <Filter>Source Files</Filter>
-    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Text Include="Passwords.txt">
@@ -34,5 +29,10 @@
     <Text Include="Usernames.txt">
       <Filter>Source Files</Filter>
     </Text>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="Dictionary.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>
