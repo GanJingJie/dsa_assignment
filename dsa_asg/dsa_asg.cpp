@@ -23,10 +23,11 @@ void createTopic() {
 
     cout << "Enter topic name: ";
     getline(cin, topicName);
-    topicList.add();
+    
 
     cout << "What would you like to type: ";
-    getline(cin, post);;
+    getline(cin, post);
+    topicList.add(topicName, post);
 }
 
 void viewTopic() {
@@ -93,8 +94,8 @@ void logInCheck() {
         while (passwordTries > 0) {
             cout << "Please enter your password: ";
             cin >> password;
-
             getPassword();
+
             if (password == Password) {
                 loggedIn = 1;
                 passwordTries = 0;
@@ -106,7 +107,7 @@ void logInCheck() {
             }
         }
 
-        if (passwordTries >= 0) {
+        if (passwordTries <= 0) {
             cout << "You have enter the incorrect password 3 times. You will be logged out." << endl;
             exit;
         }
