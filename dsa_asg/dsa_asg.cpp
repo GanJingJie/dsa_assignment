@@ -154,6 +154,8 @@ void Register() {
             getline(read, existingUser);
             if (username == existingUser) {
                 cout << "Username already exists!" << endl;
+                success = 0;
+                same = true;
                 break;
             }
             else
