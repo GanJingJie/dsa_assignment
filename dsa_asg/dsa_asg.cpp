@@ -142,6 +142,7 @@ void logIn() {
 
 void Register() {
     bool same = true;
+    bool success = 0;
     while (same) {
         fileName = "Usernames.txt";
         cout << "Please enter a username: ";
@@ -158,13 +159,13 @@ void Register() {
             else
             {
                 same = false;
+                success = 1;
             }
         }
         read.close();
     }
 
-    bool yes = true;
-    while (yes) {
+    while (success) {
         cout << "Please enter a password: ";
         cin >> password;
         if (password.length() < 8) {
