@@ -41,7 +41,7 @@ int Dictionary::hash(KeyType key)
 	return strvalue;
 }
 
-bool Dictionary::add(KeyType nKey, ItemType nUser, ItemType nItem)
+bool Dictionary::add(KeyType nKey, ItemType nUser, Node* nItem)
 {
 	int value = hash(nKey);
 	if (items[value] == NULL)
@@ -96,12 +96,12 @@ void Dictionary::remove(KeyType key)
 	}
 }
 
-ItemType Dictionary::get(KeyType key)
+Node *Dictionary::get(KeyType key)
 {
 	int value = hash(key);
 	if (items[value] != NULL)
 	{
-		return items[value]->item;
+		return items[value];
 	}
 }
 

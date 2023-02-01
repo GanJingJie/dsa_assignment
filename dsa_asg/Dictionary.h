@@ -10,7 +10,7 @@ struct Node
 {
 	KeyType  key;
 	ItemType user;
-	ItemType item;
+	Node* item;
 	Node* next;
 };
 
@@ -26,9 +26,9 @@ public:
 	~Dictionary();
 
 	int hash(KeyType key);
-	bool add(KeyType newKey, ItemType user, ItemType newItem);
+	bool add(KeyType newKey, ItemType user, Node* newItem);
 	void remove(KeyType key);
-	ItemType get(KeyType key);
+	Node* get(KeyType key);
 	bool isEmpty();
 	int getLength();
 
