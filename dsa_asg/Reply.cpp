@@ -11,6 +11,8 @@ Reply::Reply() {
 	reply_size = 0;
 }
 
+Reply::~Reply(){}
+
 bool Reply::add(Itemtype reply) {
 	bool success = reply_size < reply_max;
 	if (success)
@@ -32,4 +34,8 @@ void Reply::remove(int index) {
 			reply_size--;
 		}
 	}
+}
+
+bool Reply::isEmpty() {
+	return reply_size = 0;
 }
