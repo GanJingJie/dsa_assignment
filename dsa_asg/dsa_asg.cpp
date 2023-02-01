@@ -178,7 +178,7 @@ void Register() {
         }
 
         else {
-            yes = false;
+            success = 0;
 
             // writing username to file "Usernames.txt"
             write.open(fileName, ios_base::app);
