@@ -41,7 +41,7 @@ int Dictionary::hash(KeyType key)
 	return strvalue;
 }
 
-bool Dictionary::add(KeyType nKey, ItemType nUser, Node* nItem)
+bool Dictionary::add(KeyType nKey, ItemType nUser)
 {
 	int value = hash(nKey);
 	if (items[value] == NULL)
@@ -49,7 +49,7 @@ bool Dictionary::add(KeyType nKey, ItemType nUser, Node* nItem)
 		Node* newNode = new Node();
 		newNode->key = nKey;
 		newNode->user = nUser;
-		newNode->item = nItem;
+		newNode->item = NULL;
 		newNode->next = NULL;
 
 		items[value] = newNode;
@@ -76,13 +76,14 @@ bool Dictionary::add(KeyType nKey, ItemType nUser, Node* nItem)
 		Node* newNode = new Node();
 		newNode->key = nKey;
 		newNode->user = nUser;
-		newNode->item = nItem;
+		newNode->item = NULL;
 		newNode->key = nKey;
 		items[value] = newNode;
 		temp->next = newNode;
 	}
 
 	size++;
+	cout << "Topic created successfully!" << endl;
 	return true;
 }
 

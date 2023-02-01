@@ -1,5 +1,6 @@
 #include<string>
 #include<iostream>
+#include "Posts.h"
 using namespace std;
 
 const int max_size = 1000;
@@ -10,7 +11,7 @@ struct Node
 {
 	KeyType  key;
 	ItemType user;
-	Node* item;
+	postNode* item;
 	Node* next;
 };
 
@@ -26,7 +27,7 @@ public:
 	~Dictionary();
 
 	int hash(KeyType key);
-	bool add(KeyType newKey, ItemType user, Node* newItem);
+	bool add(KeyType newKey, ItemType user);
 	void remove(KeyType key);
 	Node* get(KeyType key);
 	bool isEmpty();

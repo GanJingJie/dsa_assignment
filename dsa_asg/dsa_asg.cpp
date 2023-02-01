@@ -20,19 +20,14 @@ void createPost() {
 
 }
 
-/*void createTopic(string username) {
+void createTopic(string username) {
     string topicName;
-    string post;
 
     cout << "Enter topic name: ";
     getline(cin, topicName);
-
-    cout << "What would you like to type: ";
-    getline(cin, post);
     
-    topicList.add(topicName, username, post);
-        
-}*/
+    topicList.add(topicName, username);
+}
 
 void viewTopics() {
     int choice = 0;
