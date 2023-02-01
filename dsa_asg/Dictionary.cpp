@@ -105,6 +105,8 @@ Node *Dictionary::get(KeyType key)
 	{
 		return items[value];
 	}
+
+	return items[value];
 }
 
 bool Dictionary::isEmpty()

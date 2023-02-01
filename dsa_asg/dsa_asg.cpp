@@ -20,7 +20,7 @@ void createPost() {
 
 }
 
-void createTopic(string username) {
+/*void createTopic(string username) {
     string topicName;
     string post;
 
@@ -32,7 +32,7 @@ void createTopic(string username) {
     
     topicList.add(topicName, username, post);
         
-}
+}*/
 
 void viewTopics() {
     int choice = 0;
@@ -56,7 +56,7 @@ void ForumPage(string username) {
         cin.ignore(numeric_limits<streamsize>::max(), '\n');
 
         if (choice == 1) {
-            createTopic(username);
+            //createTopic(username);
         }
 
         else if (choice == 2) {
@@ -91,7 +91,6 @@ void logInCheck() {
         getline(read, existingUser);
         if (username != existingUser) {
             lineNo++;
-            cout << lineNo;
         }
         else {
             success = 1;
@@ -196,6 +195,7 @@ void Register() {
             write.close();
 
             cout << "User registered successfully!" << endl << endl;
+            main();
 
         }
     }
