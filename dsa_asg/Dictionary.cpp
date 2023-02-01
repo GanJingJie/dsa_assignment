@@ -47,6 +47,7 @@ bool Dictionary::add(KeyType nKey, ItemType nUser, Node* nItem)
 	if (items[value] == NULL)
 	{
 		Node* newNode = new Node();
+		newNode->key = nKey;
 		newNode->user = nUser;
 		newNode->item = nItem;
 		newNode->next = NULL;
@@ -73,6 +74,7 @@ bool Dictionary::add(KeyType nKey, ItemType nUser, Node* nItem)
 		}
 
 		Node* newNode = new Node();
+		newNode->key = nKey;
 		newNode->user = nUser;
 		newNode->item = nItem;
 		newNode->key = nKey;

@@ -29,15 +29,9 @@ void createTopic(string username) {
 
     cout << "What would you like to type: ";
     getline(cin, post);
-    while (!topicList.isEmpty()) {
-        if (/*check if topic name == topicName*/) {
-            cout << "Topic already Exists!" << endl;
-        }
-
-        else{
-            topicList.add(topicName, username, post);
-        }
-    }
+    
+    topicList.add(topicName, username, post);
+        
 }
 
 void viewTopics() {
