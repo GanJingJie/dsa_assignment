@@ -14,11 +14,12 @@ Posts::Posts() {
 Posts::~Posts(){}
 
 // Adding to end of list
-bool Posts::add(itemType post) {
+bool Posts::add(itemType post, itemType user) {
 	bool success = size < max_array;
 	if (success)
 	{
 		posts[size]->post = post;
+		posts[size]->user = user;
 		size++;
 	}
 

@@ -20,7 +20,34 @@ Reply replyList;
 
 void createPost(string username) 
 {
-    
+    string post;
+    cout << "=============Post=============" << endl;
+    cout << "enter your post:" << endl;
+    getline(cin, post);
+
+    postList.add(post, username);
+    postList.printPost();
+
+    bool inPost = true;
+    string option;
+    while (inPost)
+    {
+        cout << "" << endl;
+        cout << "1. Add another post" << endl;
+        cout << "2. go back to View all topics" << endl;
+        cin >> option;
+
+        if (option == "1")
+        {
+            createPost(username);
+            inPost = false;
+        }
+
+        else if (option == "2")
+        {
+            inPost = false;
+        }
+    }
 }
 
 void createTopic(string username) {
@@ -34,7 +61,7 @@ void createTopic(string username) {
     string option;
     while (inTopic)
     {
-        cout << "------------ TOPIC ------------" << endl;
+        cout << "------------TOPIC------------" << endl;
         cout << "" << endl;
         cout << topicName << endl;
         cout << "------------------------" << endl;
@@ -46,6 +73,7 @@ void createTopic(string username) {
         if (option == "1")
         {
             createPost(username);
+            inTopic = false;
         }
 
         else if (option == "2")

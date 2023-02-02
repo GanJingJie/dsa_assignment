@@ -9,6 +9,7 @@ typedef string itemType;
 
 struct postNode {
 	itemType post;
+	itemType user;
 	replyNode* replynext;
 	postNode* next;
 };
@@ -23,7 +24,7 @@ public:
 	Posts();
 	~Posts();
 
-	bool add(itemType post);
+	bool add(itemType post, itemType user);
 	bool add(int index, itemType post);//what is this for? is it so that we can edit the post and then put it back at the same index?
 	void remove(int index);
 	bool isEmpty();
