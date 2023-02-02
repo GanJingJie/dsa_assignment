@@ -57,3 +57,16 @@ void Posts::remove(int index) {
 bool Posts::isEmpty() {
 	return size = 0;
 }
+
+void Posts::printPost()
+{
+	int count = 1;
+	for (int i = 0; i < max_array; i++)
+	{
+		if (posts[i] != NULL)
+		{
+			cout << count << ". " << posts[i]->post << endl;
+			count++;
+		}
+	}
+}
