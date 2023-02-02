@@ -25,8 +25,8 @@ void createPost(string username)
     cout << "enter your post:" << endl;
     getline(cin, post);
 
-    postList.add(post, username);
-    postList.printPost();
+    //postList.add(post, username);
+    //postList.printPost();
 
     bool inPost = true;
     string option;
@@ -34,7 +34,7 @@ void createPost(string username)
     {
         cout << "" << endl;
         cout << "1. Add another post" << endl;
-        cout << "2. go back to View all topics" << endl;
+        cout << "2. go back to View all topics";
         cin >> option;
 
         if (option == "1")

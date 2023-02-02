@@ -25,7 +25,7 @@ public:
 	~Posts();
 
 	bool add(itemType post, itemType user);
-	bool add(int index, itemType post);//what is this for? is it so that we can edit the post and then put it back at the same index?
+	bool add(int index, itemType post, itemType user);//what is this for? is it so that we can edit the post and then put it back at the same index?
 	void remove(int index);
 	bool isEmpty();
 	void printPost();

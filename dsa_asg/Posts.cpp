@@ -27,7 +27,7 @@ bool Posts::add(itemType post, itemType user) {
 }
 
 // Adding to middle of list
-bool Posts::add(int index, itemType post) {
+bool Posts::add(int index, itemType post, itemType user) {
 	bool success = (index >= 0) && (index <= size) && (size < max_array);
 	if (success)
 	{  
@@ -36,6 +36,7 @@ bool Posts::add(int index, itemType post) {
 		}
 
 		posts[index]->post = post;
+		posts[index]->user = user;
 		size++; 
 	}
 	return success;
