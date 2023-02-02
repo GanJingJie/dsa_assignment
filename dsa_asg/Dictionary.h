@@ -11,7 +11,7 @@ struct Node
 {
 	KeyType  key;
 	ItemType user;
-	postNode* item;
+	postNode* post;
 	Node* next;
 };
 
@@ -29,9 +29,9 @@ public:
 	int hash(KeyType key);
 	bool add(KeyType newKey, ItemType user);
 	void remove(KeyType key);
-	Node* get(KeyType key);
+	postNode* getPost(KeyType key);
 	bool isEmpty();
 	int getLength();
 
-	void print();
+	void printTopic();
 };

@@ -102,6 +102,7 @@ void logInCheck() {
             cout << "Please enter your password: ";
             cin >> password;
             getPassword();
+            cout << Password;
 
             if (password == Password) {
                 loggedIn = 1;

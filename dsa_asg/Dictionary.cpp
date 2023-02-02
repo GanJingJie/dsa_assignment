@@ -99,20 +99,24 @@ void Dictionary::remove(KeyType key)
 	}
 }
 
-Node *Dictionary::get(KeyType key)
+postNode *Dictionary::getPost(KeyType key)
 {
 	int value = hash(key);
 	if (items[value] != NULL)
 	{
-		return items[value];
+		return items[value]->post;
 	}
 
-	return items[value];
 }
 
 bool Dictionary::isEmpty()
 {
-	return size = 0;
+	if (size == 0)
+	{
+		return true;
+	}
+	else
+		return false;
 }
 
 int Dictionary::getLength()
@@ -120,7 +124,7 @@ int Dictionary::getLength()
 	return size;
 }
 
-void Dictionary::print()
+void Dictionary::printTopic()
 {
 	int count = 1;
 	for (int i = 0; i < max_size; i++)
