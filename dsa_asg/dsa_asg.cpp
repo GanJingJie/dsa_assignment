@@ -18,17 +18,47 @@ Dictionary topicList;
 Posts postList;
 Reply replyList;
 
-void createPost(string username) {
+void createPost(string username) 
+{
     
 }
 
 void createTopic(string username) {
-    string topicName;
 
+    string topicName;
     cout << "Enter topic name: ";
     getline(cin, topicName);
-    
     topicList.add(topicName, username);
+
+    bool inTopic = true;
+    string option;
+    while (inTopic)
+    {
+        cout << "------------ TOPIC ------------" << endl;
+        cout << "" << endl;
+        cout << topicName << endl;
+        cout << "------------------------" << endl;
+        cout << "1. Add post" << endl;
+        cout << "2. Back to previous menu" << endl;
+        cin >> option;
+        cin.ignore(numeric_limits<streamsize>::max(), '\n');
+
+        if (option == "1")
+        {
+            createPost(username);
+        }
+
+        else if (option == "2")
+        {
+            inTopic = false;
+        }
+
+        else
+        {
+            cout << "invalid option please try again" << endl;
+        }
+    }
+
 }
 
 void viewTopics(string username) {
@@ -36,7 +66,7 @@ void viewTopics(string username) {
     bool success = 1;
 
     cout << "----------- TOPICS -----------" << endl;
-    topicList.print();
+    topicList.printTopic();
     cout << "------------------------------" << endl;
 
     while (success) {
@@ -71,8 +101,7 @@ void ForumPage(string username) {
         cout << "------------ MENU ------------" << endl;
         cout << "1. Create Topic" << endl;
         cout << "2. View Topics" << endl;
-        cout << "3. Create Post" << endl;
-        cout << "4. View Post" << endl;
+        cout << "3. View Post" << endl;
         cout << "0. Log Out" << endl;
         cout << "------------------------------" << endl;
         cout << "Your choice: ";
@@ -88,10 +117,6 @@ void ForumPage(string username) {
         }
 
         else if (choice == 3) {
-            //createPost();
-        }
-
-        else if (choice == 4) {
             //viewPost();
         }
 
