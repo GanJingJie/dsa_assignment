@@ -15,9 +15,11 @@ string username, password, fileName, existingUser, Password;
 ofstream write;
 ifstream read;
 Dictionary topicList;
+Posts postList;
+Reply replyList;
 
-void createPost() {
-
+void createPost(string username) {
+    
 }
 
 void createTopic(string username) {
@@ -29,11 +31,37 @@ void createTopic(string username) {
     topicList.add(topicName, username);
 }
 
-void viewTopics() {
+void viewTopics(string username) {
     int choice = 0;
+    bool success = 1;
+
     cout << "----------- TOPICS -----------" << endl;
     topicList.print();
     cout << "------------------------------" << endl;
+
+    while (success) {
+        cout << "------------ MENU ------------" << endl;
+        cout << "1. Create Topic" << endl;
+        cout << "2. Create Post" << endl;
+        cout << "0. Log Out" << endl;
+        cout << "------------------------------" << endl;
+        cout << "Your choice: ";
+        cin >> choice;
+        cin.ignore(numeric_limits<streamsize>::max(), '\n');
+
+        if (choice == 1) {
+            createTopic(username);
+        }
+
+        else if (choice == 2) {
+            createPost(username);
+        }
+
+        else if (choice == 0) {
+            success = 0;
+            break;
+        }
+    }
 }
 
 void ForumPage(string username) {
@@ -44,6 +72,7 @@ void ForumPage(string username) {
         cout << "1. Create Topic" << endl;
         cout << "2. View Topics" << endl;
         cout << "3. Create Post" << endl;
+        cout << "4. View Post" << endl;
         cout << "0. Log Out" << endl;
         cout << "------------------------------" << endl;
         cout << "Your choice: ";
@@ -51,15 +80,19 @@ void ForumPage(string username) {
         cin.ignore(numeric_limits<streamsize>::max(), '\n');
 
         if (choice == 1) {
-            //createTopic(username);
+            createTopic(username);
         }
 
         else if (choice == 2) {
-            viewTopics();
+            viewTopics(username);
         }
 
         else if (choice == 3) {
             //createPost();
+        }
+
+        else if (choice == 4) {
+            //viewPost();
         }
 
         else if (choice == 0){
