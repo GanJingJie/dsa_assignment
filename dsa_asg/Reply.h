@@ -24,5 +24,6 @@ public:
 	bool add(Itemtype reply);
 	void remove(int index);
 	bool isEmpty();
+	void printReply();
 };
 

@@ -39,3 +39,16 @@ void Reply::remove(int index) {
 bool Reply::isEmpty() {
 	return reply_size = 0;
 }
+
+void Reply::printReply()
+{
+	int count = 1;
+	for (int i = 0; i < reply_max; i++)
+	{
+		if (replies[i] != NULL)
+		{
+			cout << count << ". " << replies[i]->reply << endl;
+			count++;
+		}
+	}
+}
