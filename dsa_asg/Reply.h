@@ -9,6 +9,7 @@ typedef string Itemtype;
 class Reply
 {
 private:
+
 	struct replyNode 
 	{
 		Itemtype reply;
@@ -25,6 +26,8 @@ public:
 
 	//add reply
 	bool add(Itemtype reply, Itemtype user);
+	//edit a reply with the index of the reply
+	bool edit(int index, Itemtype reply, Itemtype user);
 	//remove a reply
 	void remove(int index);
 	//check if post has a reply

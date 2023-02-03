@@ -5,22 +5,22 @@ using namespace std;
 
 Posts::Posts() 
 {
-	firstPost = NULL;
+	firstNode = NULL;
 	size = 0;
 }
 
-Posts::~Posts()//addOn
+Posts::~Posts()
 {
-	postNode* current = firstPost;
+	postNode* current = firstNode;
 
 	while (!isEmpty)
 	{
-		
+		remove(0);
 	}
 }
 
 // Adding to end of list
-bool Posts::add(itemType post, itemType user) 
+bool Posts::add(ItemType post, ItemType user) 
 {
 	postNode* newNode = new postNode;
 	newNode->next = NULL;
@@ -30,12 +30,12 @@ bool Posts::add(itemType post, itemType user)
 
 	if (size == 0)
 	{
-		firstPost = newNode;
+		firstNode = newNode;
 	}
 
 	else
 	{
-		postNode* temp = firstPost;
+		postNode* temp = firstNode;
 		while (temp->next = NULL)
 		{
 			temp = temp->next;
@@ -47,8 +47,14 @@ bool Posts::add(itemType post, itemType user)
 	return true;
 }
 
+bool Posts::addReply(ItemType reply, ItemType user)
+{
+	replyNode->add(reply, user);
+	return true;
+}
+
 // Adding to middle of list
-bool Posts::edit(int index, itemType post, itemType user) 
+bool Posts::edit(int index, ItemType post, ItemType user) 
 {
 	if (index < size)
 	{
@@ -60,13 +66,13 @@ bool Posts::edit(int index, itemType post, itemType user)
 
 		if (index == 0)
 		{
-			newNode->next = firstPost;
-			firstPost->next = newNode;
+			newNode->next = firstNode;
+			firstNode->next = newNode;
 		}
 
 		else
 		{
-			postNode* temp = firstPost;
+			postNode* temp = firstNode;
 			for (int i = 0; i < index; i++)
 			{
 				temp = temp->next;
@@ -80,6 +86,15 @@ bool Posts::edit(int index, itemType post, itemType user)
 	}
 }
 
+bool Posts::editReply(int index, ItemType reply, ItemType user)
+{
+	replyNode->edit(index, reply, user);
+}
+
+void Posts::removeReply(int index)
+{
+	replyNode->remove(index);
+}
 
 // Deleting at index
 void Posts::remove(int index) 
@@ -90,14 +105,14 @@ void Posts::remove(int index)
 		{
 			if (size == 1)
 			{
-				firstPost->reply = NULL;
-				firstPost = firstPost->next;
+				firstNode->reply = NULL;
+				firstNode = firstNode->next;
 
 			}
 			else
 			{
-				postNode* temp = firstPost;
-				firstPost = firstPost->next;
+				postNode* temp = firstNode;
+				firstNode = firstNode->next;
 				temp->next = NULL;
 				temp->reply = NULL;
 				delete temp;
@@ -106,7 +121,7 @@ void Posts::remove(int index)
 		}
 		else
 		{
-			postNode* current = firstPost;
+			postNode* current = firstNode;
 			for (int i = 0; i < index; i++)
 			{
 				current = current->next;
@@ -137,12 +152,16 @@ bool Posts::isEmpty()
 
 void Posts::printPost()
 {
-	postNode* current = firstPost;
+	postNode* current = firstNode;
 	for (int i = 0; i < size; i++)
 	{
-		cout << current->post << endl;
-		replyNode* 
+		cout << i << "." << current->post << endl;
+		current = current->next;
 	}
 
+}
 
+void Posts::printReply()
+{
+	replyNode->printReply();
 }

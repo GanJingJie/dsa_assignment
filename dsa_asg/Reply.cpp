@@ -45,6 +45,39 @@ bool Reply::add(Itemtype reply, Itemtype user)
 	return true;
 }
 
+bool Reply::edit(int index, Itemtype reply, Itemtype user)
+{
+	if (index < size)
+	{
+		replyNode* newNode = new replyNode;
+		newNode->reply = reply;
+		newNode->user = user;
+		newNode->replyNext = NULL;
+
+		if (index == 0)
+		{
+			newNode->replyNext = firstNode;
+			firstNode->replyNext = newNode;
+		}
+
+		else
+		{
+			replyNode* temp = firstNode;
+			for (int i = 0; i < index; i++)
+			{
+				temp = temp->replyNext;
+
+			}
+			newNode->replyNext = temp->replyNext;
+			temp->replyNext = newNode;
+		}
+		size++;
+		return true;
+	}
+}
+
+
+
 void Reply::remove(int index)
 {
 	if (size > index)
@@ -95,7 +128,7 @@ void Reply::printReply()
 	replyNode* current = firstNode;
 	for (int i = 0; i < size; i++)
 	{
-		cout << "\t" << current->reply << endl;
+		cout << "\t"<< i << "." << current->reply << endl;
 		current = current->replyNext;
 	}
 }
