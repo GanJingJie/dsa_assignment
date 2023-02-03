@@ -3,72 +3,147 @@
 #include <iostream>
 using namespace std;
 
-Posts::Posts() {
-	for (int i = 0; i < max_array; i++) {
-		posts[i] = NULL;
-	}
-
+Posts::Posts() 
+{
+	firstPost = NULL;
 	size = 0;
 }
 
-Posts::~Posts(){}
+Posts::~Posts()//addOn
+{
+	postNode* current = firstPost;
+
+	while (!isEmpty)
+	{
+		
+	}
+}
 
 // Adding to end of list
-bool Posts::add(itemType post, itemType user) {
-	bool success = size < max_array;
-	if (success)
+bool Posts::add(itemType post, itemType user) 
+{
+	postNode* newNode = new postNode;
+	newNode->next = NULL;
+	newNode->post = post;
+	newNode->user = user;
+	newNode->reply = NULL;
+
+	if (size == 0)
 	{
-		posts[size]->post = post;
-		posts[size]->user = user;
-		size++;
+		firstPost = newNode;
 	}
 
-	return success;
+	else
+	{
+		postNode* temp = firstPost;
+		while (temp->next = NULL)
+		{
+			temp = temp->next;
+
+		}
+		temp->next = newNode;
+	}
+	size++;
+	return true;
 }
 
 // Adding to middle of list
-bool Posts::add(int index, itemType post, itemType user) {
-	bool success = (index >= 0) && (index <= size) && (size < max_array);
-	if (success)
-	{  
-		for (int pos = size; pos >= index; pos--) {
-			posts[pos] = posts[pos - 1];
+bool Posts::edit(int index, itemType post, itemType user) 
+{
+	if (index <=size)
+	{
+		postNode* newNode = new postNode;
+		newNode->post = post;
+		newNode->user = user;
+		newNode->reply = NULL;
+		newNode->next = NULL;
+
+		if (index == 0)
+		{
+			newNode->next = firstPost;
+			firstPost->next = newNode;
 		}
 
-		posts[index]->post = post;
-		posts[index]->user = user;
-		size++; 
+		else
+		{
+			postNode* temp = firstPost;
+			for (int i = 0; i < index; i++)
+			{
+				temp = temp->next;
+
+			}
+			newNode->next = temp->next;
+			temp->next = newNode;
+		}
+		size++;
+		return true;
 	}
-	return success;
 }
 
+
 // Deleting at index
-void Posts::remove(int index) {
-	bool success = (index >= 0) && (index <= max_array);
-	if (success)
+void Posts::remove(int index) 
+{
+	if (size >= index)
 	{
-		for (int i = index; i < size; i++)
+		if (index == 0)
 		{
-			posts[i] = posts[i + 1];
-			size--;
+			if (size == 1)
+			{
+				firstPost->next = NULL;
+				firstPost->reply = NULL;
+				delete firstPost;
+
+			}
+			else
+			{
+				postNode* temp = firstPost;
+				firstPost = firstPost->next;
+				temp->next = NULL;
+				temp->reply = NULL;
+				delete temp;
+			}
+
 		}
+		else
+		{
+			postNode* current = firstPost;
+			for (int i = 0; i < index; i++)
+			{
+				current = current->next;
+			}
+			postNode* temp = current;
+			current = current->next;
+			temp->next = current->next;
+			current->next = NULL;
+			current->reply = NULL;
+			delete current;
+		}
+		size--;
 	}
 }
 
 // Checking isEmpty
-bool Posts::isEmpty() {
-	return size = 0;
+bool Posts::isEmpty() 
+{
+	if (size == 0)
+	{
+		return true;
+	}
+	else
+	{
+		return false;
+	}
 }
 
 void Posts::printPost()
 {
-	int count = 1;
-	for (int i = 0; i < max_array; i++)
+	postNode* current = firstPost;
+	for (int i = 0; i < size; i++)
 	{
-		if (posts[i] != NULL)
-		{
-			cout << count << ". " << posts[i]->post << endl;
-			count++;
-		}
+		cout << current->post << endl;
+		replyNode* 
 	}
+
+
 }
