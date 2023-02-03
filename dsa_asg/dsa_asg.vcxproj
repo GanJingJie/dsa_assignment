@@ -127,7 +127,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="Dictionary.cpp" />
+    <ClCompile Include="List.cpp" />
     <ClCompile Include="dsa_asg.cpp" />
     <ClCompile Include="Posts.cpp" />
     <ClCompile Include="Reply.cpp" />
@@ -137,7 +137,7 @@
     <Text Include="Usernames.txt" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Dictionary.h" />
+    <ClInclude Include="List.h" />
     <ClInclude Include="Posts.h" />
     <ClInclude Include="Reply.h" />
   </ItemGroup>
