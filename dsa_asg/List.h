@@ -6,7 +6,7 @@ using namespace std;
 typedef string ItemType;
 
 
-class Dictionary
+class List
 {
 private:
 
