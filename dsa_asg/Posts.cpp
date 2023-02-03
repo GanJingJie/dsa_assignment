@@ -50,7 +50,7 @@ bool Posts::add(itemType post, itemType user)
 // Adding to middle of list
 bool Posts::edit(int index, itemType post, itemType user) 
 {
-	if (index <=size)
+	if (index < size)
 	{
 		postNode* newNode = new postNode;
 		newNode->post = post;
@@ -90,9 +90,8 @@ void Posts::remove(int index)
 		{
 			if (size == 1)
 			{
-				firstPost->next = NULL;
 				firstPost->reply = NULL;
-				delete firstPost;
+				firstPost = firstPost->next;
 
 			}
 			else

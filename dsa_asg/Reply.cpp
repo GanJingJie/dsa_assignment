@@ -3,52 +3,99 @@
 #include <iostream>
 using namespace std;
 
-Reply::Reply() {
-	for (int i = 0; i < reply_max; i++) {
-		replies[i] = NULL;
-	}
+Reply::Reply()
+{
+	firstNode = NULL;
+	size = 0;
 
-	reply_size = 0;
 }
 
-Reply::~Reply(){}
-
-bool Reply::add(Itemtype reply) {
-	bool success = reply_size < reply_max;
-	if (success)
+Reply::~Reply()
+{
+	while (!isEmpty)
 	{
-		replies[reply_size]->reply = reply;
-		reply_size++;
+		remove(0);
 	}
-
-	return success;
 }
 
-void Reply::remove(int index) {
-	bool success = (index >= 0) && (index <= reply_max);
-	if (success)
+bool Reply::add(Itemtype reply, Itemtype user)
+{
+	replyNode* newNode = new replyNode;
+	newNode->reply = reply;
+	newNode->replyNext = NULL;
+	newNode->user = user;
+
+	if (size == 0)
 	{
-		for (int i = index; i < reply_size; i++)
+		firstNode = newNode;
+	}
+
+	else
+	{
+		replyNode* temp = firstNode;
+		while (temp->replyNext != NULL)
 		{
-			replies[i] = replies[i + 1];
-			reply_size--;
+			temp = temp->replyNext;
+
+		}
+		temp->replyNext = newNode;
+
+	}
+	size++;
+	return true;
+}
+
+void Reply::remove(int index)
+{
+	if (size > index)
+	{
+		if (index == 0)
+		{
+			if (size == 1)
+			{
+				firstNode = firstNode->replyNext;
+			}
+
+			else
+			{
+				replyNode* temp = firstNode;
+				firstNode = firstNode->replyNext;
+				temp->replyNext = NULL;
+				delete temp;
+			}
+		}
+
+		else
+		{
+			replyNode* current = firstNode;
+			for (int i = 0; i < index; i++)
+			{
+				current = current->replyNext;
+			}
+			replyNode* temp = current;
+			current = current->replyNext;
+			temp->replyNext = current->replyNext;
+			current->replyNext = NULL;
+			delete current;
 		}
 	}
+	size--;
 }
 
-bool Reply::isEmpty() {
-	return reply_size = 0;
+bool Reply::isEmpty()
+{
+	if (size == 0)
+	{
+		return true;
+	}
 }
 
 void Reply::printReply()
 {
-	int count = 1;
-	for (int i = 0; i < reply_max; i++)
+	replyNode* current = firstNode;
+	for (int i = 0; i < size; i++)
 	{
-		if (replies[i] != NULL)
-		{
-			cout << count << ". " << replies[i]->reply << endl;
-			count++;
-		}
+		cout << "\t" << current->reply << endl;
+		current = current->replyNext;
 	}
 }

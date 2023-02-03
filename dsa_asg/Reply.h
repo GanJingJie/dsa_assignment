@@ -3,27 +3,33 @@
 #include <iostream>
 using namespace std;
 
-const int reply_max = 100;
 typedef string Itemtype;
 
-struct replyNode {
-	Itemtype reply;
-	replyNode* replynext;
-};
 
 class Reply
 {
 private:
-	replyNode* replies[reply_max];
-	int reply_size;
+	struct replyNode 
+	{
+		Itemtype reply;
+		Itemtype user;
+		replyNode* replyNext;
+	};
+	
+	replyNode* firstNode;
+	int size;
 
 public:
 	Reply();
 	~Reply();
 
-	bool add(Itemtype reply);
+	//add reply
+	bool add(Itemtype reply, Itemtype user);
+	//remove a reply
 	void remove(int index);
+	//check if post has a reply
 	bool isEmpty();
+	//print out all the replies for a post
 	void printReply();
 };
 

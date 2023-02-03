@@ -5,21 +5,21 @@
 using namespace std;
 
 typedef string itemType;
-struct postNode
-{
-	itemType post;
-	itemType user;
-	replyNode* reply;
-	postNode* next;
-};
 
 class Posts
 {
 private:
+
+	struct postNode
+	{
+		itemType post;
+		itemType user;
+		Reply* reply;
+		postNode* next;
+	};
+
 	
-	Reply replies;
 	postNode* firstPost;
-	replyNode* reply
 	int size;
 
 public:
