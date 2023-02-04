@@ -46,12 +46,12 @@ bool List::add(ItemType topic, ItemType user)
 
 bool List::addPost(ItemType postStr, ItemType user)
 {
-	post.add(postStr, user);
+	return post.add(postStr, user);
 }
 
 bool List::addReply(ItemType replyStr, ItemType user)
 {
-	post.addReply(replyStr, user);
+	return post.addReply(replyStr, user);
 }
 
 bool List::edit(int index, ItemType topic)
@@ -77,12 +77,12 @@ bool List::edit(int index, ItemType topic)
 
 bool List::editPost(int index, ItemType postStr)
 {
-	post.edit(index, postStr);
+	return post.edit(index, postStr);
 }
 
 bool List::editReply(int index, ItemType replyStr)
 {
-	post.editReply(index, replyStr);
+	return post.editReply(index, replyStr);
 }
 
 void List::remove(int index)

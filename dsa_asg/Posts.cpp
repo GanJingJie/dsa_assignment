@@ -78,7 +78,7 @@ bool Posts::edit(int index, ItemType post)
 
 bool Posts::editReply(int index, ItemType replyStr)
 {
-	reply->edit(index, replyStr);
+	return reply->edit(index, replyStr);
 }
 
 void Posts::removeReply(int index)
