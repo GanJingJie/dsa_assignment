@@ -109,15 +109,15 @@ void viewTopics(string username) {
         cin >> choice;
         cin.ignore(numeric_limits<streamsize>::max(), '\n');
 
-        if (choice == 1) {
+        if (choice == "1") {
             createTopic(username);
         }
 
-        else if (choice == 2) {
+        else if (choice == "2") {
             createPost(username);
         }
 
-        else if (choice == 0) {
+        else if (choice == "0") {
             success = 0;
         }
         else
