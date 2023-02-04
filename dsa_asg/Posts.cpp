@@ -110,7 +110,7 @@ void Posts::remove(int index)
 
 		else
 		{
-			postNode* prev;
+			postNode* prev = temp;
 			for (int i = 0; i < index; i++)
 			{
 				prev = temp;
