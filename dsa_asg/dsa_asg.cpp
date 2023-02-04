@@ -20,8 +20,32 @@ List topicList;
 //Posts postList;
 //Reply replyList;
 
+// Function to check if input is integer
+bool isNumeric(string str) {
+    for (int i = 0; i < str.length(); i++) {
+        if (isdigit(str[i]) == false) {
+            return false;
+        }
+    }
+
+    return true;
+}
+
 void deletePost() {
-    
+
+    string topicIndex;
+
+    cout << "----------- TOPICS -----------" << endl;
+    topicList.printTopic();
+    cout << "------------------------------" << endl;
+    cout << "Which topic would you like to delete the post from: " << endl;
+    getline(cin, topicIndex);
+
+    if (isNumeric(topicIndex)) {
+        int index = stoi(topicIndex);
+        topicList.removePost(index);
+    }
+   
 }
 
 
@@ -39,7 +63,7 @@ void createPost(string username)
     string option;
     while (inPost)
     {
-        cout << "" << endl;
+        cout << endl;
         cout << "1. Add another post" << endl;
         cout << "2. go back to View all topics";
         cin >> option;
