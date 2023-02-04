@@ -103,55 +103,52 @@ void viewTopics(string username) {
         cout << "------------ MENU ------------" << endl;
         cout << "1. Create Topic" << endl;
         cout << "2. Create Post" << endl;
-        cout << "3. Delete Post" << endl;
         cout << "0. Log Out" << endl;
         cout << "------------------------------" << endl;
         cout << "Your choice: ";
         cin >> choice;
         cin.ignore(numeric_limits<streamsize>::max(), '\n');
 
-        if (choice == "1") {
+        if (choice == 1) {
             createTopic(username);
         }
 
-        else if (choice == "2") {
+        else if (choice == 2) {
             createPost(username);
         }
 
-        else if (choice == "3") {
-            //
-        }
-
-        else if (choice == "0") {
+        else if (choice == 0) {
             success = 0;
-            break;
+        }
+        else
+        {
+            //viewPost(choice);
         }
     }
 }
 
 void ForumPage(string username) {
     bool success = true;
-    string choice = 0;
+    int choice = 0;
     while (success){
         cout << "------------ MENU ------------" << endl;
-        cout << "1. Create Topic" << endl;
-        cout << "2. View Topics" << endl;
-        cout << "3. View Post" << endl;
+        cout << "1. View Topics" << endl;
+        cout << "2. Create Topics" << endl;
         cout << "0. Log Out" << endl;
         cout << "------------------------------" << endl;
         cout << "Your choice: ";
         cin >> choice;
         cin.ignore(numeric_limits<streamsize>::max(), '\n');
 
-        if (choice == "1") {
+        if (choice == 1) {
             createTopic(username);
         }
 
-        else if (choice == "2") {
+        else if (choice == 2) {
             viewTopics(username);
         }
 
-        else if (choice == "3") {
+        else if (choice == 3) {
             //viewPost();
         }
 
@@ -161,6 +158,11 @@ void ForumPage(string username) {
             success = false;
             cout << "Log out successful!" << endl;
             main();
+        }
+
+        else
+        {
+            cout << "Invalid choice." << endl;
         }
     }
 }
