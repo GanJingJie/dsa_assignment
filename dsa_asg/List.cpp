@@ -108,7 +108,7 @@ void List::remove(int index)
 
 		else
 		{
-			Node* prev;
+			Node* prev = firstNode;
 			for (int i = 0; i < index; i++)
 			{
 				prev = temp;

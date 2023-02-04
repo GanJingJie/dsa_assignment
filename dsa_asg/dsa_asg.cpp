@@ -24,7 +24,7 @@ void createPost(string username)
 {
     string post;
     cout << "=============Post=============" << endl;
-    cout << "enter your post:" << endl;
+    cout << "Enter your post:" << endl;
     getline(cin, post);
 
     //postList.add(post, username);
@@ -92,7 +92,7 @@ void createTopic(string username) {
 }
 
 void viewTopics(string username) {
-    int choice;
+    string choice = 0;
     bool success = 1;
 
     cout << "----------- TOPICS -----------" << endl;
@@ -100,13 +100,24 @@ void viewTopics(string username) {
     cout << "------------------------------" << endl;
 
     while (success) {
-
-        cout << "Your choice of Topic(enter 0 to exit): ";
+        cout << "------------ MENU ------------" << endl;
+        cout << "1. Create Topic" << endl;
+        cout << "2. Create Post" << endl;
+        cout << "0. Log Out" << endl;
+        cout << "------------------------------" << endl;
+        cout << "Your choice: ";
         cin >> choice;
         cin.ignore(numeric_limits<streamsize>::max(), '\n');
-        
-        if (choice == 0)
-        {
+
+        if (choice == 1) {
+            createTopic(username);
+        }
+
+        else if (choice == 2) {
+            createPost(username);
+        }
+
+        else if (choice == 0) {
             success = 0;
         }
         else
@@ -157,7 +168,7 @@ void showReplies(int index, string username)
 
 void ForumPage(string username) {
     bool success = true;
-    string choice = "0";
+    int choice = 0;
     while (success){
         cout << "------------ MENU ------------" << endl;
         cout << "1. View Topics" << endl;
@@ -168,12 +179,16 @@ void ForumPage(string username) {
         cin >> choice;
         cin.ignore(numeric_limits<streamsize>::max(), '\n');
 
-        if (choice == "1") {
+        if (choice == 1) {
+            createTopic(username);
+        }
+
+        else if (choice == 2) {
             viewTopics(username);
         }
 
-        else if (choice == "2") {
-            createTopic(username);
+        else if (choice == 3) {
+            //viewPost();
         }
 
         else if (choice == "0"){
@@ -221,7 +236,6 @@ void logInCheck() {
             cout << "Please enter your password: ";
             cin >> password;
             getPassword();
-            cout << Password;
 
             if (password == Password) {
                 loggedIn = 1;
@@ -247,10 +261,9 @@ void logInCheck() {
 void getPassword() {
     read.open("Passwords.txt");
     while (lineNo > 1) {
-        read.eof();
+        getline(read, Password);
         lineNo--;
     }
-    getline(read, Password);
     read.close();
 }
 
@@ -321,7 +334,6 @@ void Register() {
 
 int main()
 {
-    
     string username, password, fileName, opt;
     ofstream outFile;
     ifstream inFile;
@@ -330,7 +342,7 @@ int main()
         cout << "------------ MENU ------------" << endl;
         cout << "1. Register account" << endl;
         cout << "2. Log in" << endl;
-        cout << "3. Exit" << endl;
+        cout << "0. Exit" << endl;
         cout << "------------------------------" << endl;
         cout << "What would you like to do: ";
         cin >> opt;
@@ -346,7 +358,7 @@ int main()
             opt = "0";
         }
 
-        else if (opt == "3") {
+        else if (opt == "0") {
             exit;
         }
 
