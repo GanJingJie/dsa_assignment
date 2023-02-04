@@ -93,7 +93,7 @@ void Reply::remove(int index)
 
 		else
 		{
-			replyNode* prev;
+			replyNode* prev = firstNode;
 			for (int i = 0; i < index; i++)
 			{
 				prev = temp;
