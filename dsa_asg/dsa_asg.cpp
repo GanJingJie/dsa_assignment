@@ -127,9 +127,48 @@ void viewTopics(string username) {
         }
         else
         {
-            //viewPost(choice);
+            viewPost(choice, username);
         }
     }
+}
+
+void viewPost(int index, string username)
+{
+    int choice;
+    bool success = true;
+    string post;
+    cout << "-----------POSTS-----------" << endl;
+    topicList.printPost();
+    cout << "---------------------------" << endl;
+
+    while (success)
+    {
+        cout << "Your choice of Topic(enter 0 to exit): ";
+        cin >> choice;
+        cin.ignore(numeric_limits<streamsize>::max(), '\n');
+
+        if (choice == 0)
+        {
+            success = false;
+        }
+        else
+        {
+            
+            //showReplies(post, choice, username);
+        }
+
+    }
+
+}
+
+void showReplies(int index, string username)
+{
+    int choice;
+    bool success = true;
+    cout << "-----------POSTS-----------" << endl;
+    topicList.printPost();
+    cout << "---------------------------" << endl;
+
 }
 
 void ForumPage(string username) {
