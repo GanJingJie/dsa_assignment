@@ -32,9 +32,9 @@ public:
 	// add reply to a post.
 	bool addReply(ItemType reply, ItemType user);
 	//user selects the post they want to edit. the selected one will be the index.
-	bool edit(int index, ItemType post, ItemType user);
+	bool edit(int index, ItemType post);
 	//edit a reply with index of the replies
-	bool editReply(int index, ItemType reply, ItemType user);
+	bool editReply(int index, ItemType reply);
 	//remove post at the specific index
 	void remove(int index);
 	//remove a reply with the reply index.

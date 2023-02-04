@@ -45,19 +45,14 @@ bool Reply::add(Itemtype reply, Itemtype user)
 	return true;
 }
 
-bool Reply::edit(int index, Itemtype reply, Itemtype user)
+bool Reply::edit(int index, Itemtype reply)
 {
-	if (index < size)
+	if (size > index)
 	{
-		replyNode* newNode = new replyNode;
-		newNode->reply = reply;
-		newNode->user = user;
-		newNode->replyNext = NULL;
 
 		if (index == 0)
 		{
-			newNode->replyNext = firstNode;
-			firstNode->replyNext = newNode;
+			firstNode->reply = reply;
 		}
 
 		else
@@ -68,10 +63,8 @@ bool Reply::edit(int index, Itemtype reply, Itemtype user)
 				temp = temp->replyNext;
 
 			}
-			newNode->replyNext = temp->replyNext;
-			temp->replyNext = newNode;
+			temp->reply = reply;
 		}
-		size++;
 		return true;
 	}
 }
@@ -82,16 +75,16 @@ void Reply::remove(int index)
 {
 	if (size > index)
 	{
+		replyNode* temp = firstNode;
 		if (index == 0)
 		{
 			if (size == 1)
 			{
-				firstNode = firstNode->replyNext;
+				firstNode = NULL;
 			}
 
 			else
 			{
-				replyNode* temp = firstNode;
 				firstNode = firstNode->replyNext;
 				temp->replyNext = NULL;
 				delete temp;
@@ -100,19 +93,19 @@ void Reply::remove(int index)
 
 		else
 		{
-			replyNode* current = firstNode;
+			replyNode* prev;
 			for (int i = 0; i < index; i++)
 			{
-				current = current->replyNext;
+				prev = temp;
+				temp = temp->replyNext;
 			}
-			replyNode* temp = current;
-			current = current->replyNext;
-			temp->replyNext = current->replyNext;
-			current->replyNext = NULL;
-			delete current;
+			prev->replyNext = temp->replyNext;
+			temp->replyNext = NULL;
+			delete temp;
 		}
+		size--;
 	}
-	size--;
+	
 }
 
 bool Reply::isEmpty()

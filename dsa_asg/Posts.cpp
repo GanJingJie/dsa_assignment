@@ -36,7 +36,7 @@ bool Posts::add(ItemType post, ItemType user)
 	else
 	{
 		postNode* temp = firstNode;
-		while (temp->next = NULL)
+		while (temp->next != NULL)
 		{
 			temp = temp->next;
 
@@ -54,41 +54,30 @@ bool Posts::addReply(ItemType reply, ItemType user)
 }
 
 // Adding to middle of list
-bool Posts::edit(int index, ItemType post, ItemType user) 
+bool Posts::edit(int index, ItemType post) 
 {
-	if (index < size)
+	if (size > index)
 	{
-		postNode* newNode = new postNode;
-		newNode->post = post;
-		newNode->user = user;
-		newNode->reply = NULL;
-		newNode->next = NULL;
-
 		if (index == 0)
 		{
-			newNode->next = firstNode;
-			firstNode->next = newNode;
+			firstNode->post = post;
 		}
-
 		else
 		{
 			postNode* temp = firstNode;
-			for (int i = 0; i < index; i++)
+			for (int i = 0; i < size; i++)
 			{
 				temp = temp->next;
-
 			}
-			newNode->next = temp->next;
-			temp->next = newNode;
+			temp->post = post;
 		}
-		size++;
-		return true;
 	}
+	return true;
 }
 
-bool Posts::editReply(int index, ItemType reply, ItemType user)
+bool Posts::editReply(int index, ItemType reply)
 {
-	replyNode->edit(index, reply, user);
+	replyNode->edit(index, reply);
 }
 
 void Posts::removeReply(int index)
@@ -99,42 +88,41 @@ void Posts::removeReply(int index)
 // Deleting at index
 void Posts::remove(int index) 
 {
-	if (size >= index)
+	if (size > index)
 	{
+		postNode* temp = firstNode;
 		if (index == 0)
 		{
 			if (size == 1)
 			{
-				firstNode->reply = NULL;
-				firstNode = firstNode->next;
-
+				firstNode = NULL;
 			}
+
 			else
 			{
-				postNode* temp = firstNode;
 				firstNode = firstNode->next;
 				temp->next = NULL;
 				temp->reply = NULL;
 				delete temp;
 			}
-
 		}
+
 		else
 		{
-			postNode* current = firstNode;
+			postNode* prev;
 			for (int i = 0; i < index; i++)
 			{
-				current = current->next;
+				prev = temp;
+				temp = temp->next;
 			}
-			postNode* temp = current;
-			current = current->next;
-			temp->next = current->next;
-			current->next = NULL;
-			current->reply = NULL;
-			delete current;
+			prev->next = temp->next;
+			temp->next = NULL;
+			temp->reply = NULL;
+			delete temp;
 		}
 		size--;
 	}
+	
 }
 
 // Checking isEmpty

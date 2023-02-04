@@ -27,7 +27,7 @@ public:
 	//add reply
 	bool add(Itemtype reply, Itemtype user);
 	//edit a reply with the index of the reply
-	bool edit(int index, Itemtype reply, Itemtype user);
+	bool edit(int index, Itemtype reply);
 	//remove a reply
 	void remove(int index);
 	//check if post has a reply

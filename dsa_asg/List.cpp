@@ -4,7 +4,168 @@
 
 using namespace std;
 
+List::List()
+{
+	firstNode = NULL;
+	size = 0;
+}
 
+List::~List()
+{
+	while (!isEmpty)
+	{
+		remove(0);
+	}
+}
+
+
+bool List::add(ItemType topic, ItemType user)
+{
+	Node* newNode = new Node;
+	newNode->next = NULL;
+	newNode->topic = topic;
+	newNode->user = user;
+	newNode->postNode = NULL;
+
+	if (size == 0)
+	{
+		firstNode = newNode;
+	}
+	else
+	{
+		Node* temp = firstNode;
+		while (temp->next = NULL)
+		{
+			temp = temp->next;
+		}
+		temp->next = newNode;
+	}
+	size++;
+	return true;
+}
+
+bool List::addPost(ItemType postStr, ItemType user)
+{
+	post.add(postStr, user);
+}
+
+bool List::addReply(ItemType replyStr, ItemType user)
+{
+	post.addReply(replyStr, user);
+}
+
+bool List::edit(int index, ItemType topic)
+{
+	if (size > index)
+	{
+		if (index == 0)
+		{
+			firstNode->topic = topic;
+		}
+		else
+		{
+			Node* temp = firstNode;
+			for (int i = 0; i < size; i++)
+			{
+				temp = temp->next;
+			}
+			temp->topic = topic;
+		}
+	}
+	return true;
+}
+
+bool List::editPost(int index, ItemType postStr)
+{
+	post.edit(index, postStr);
+}
+
+bool List::editReply(int index, ItemType replyStr)
+{
+	post.editReply(index, replyStr);
+}
+
+void List::remove(int index)
+{
+	if (size > index)
+	{
+		Node* temp = firstNode;
+		if (index == 0)
+		{
+			if (size == 1)
+			{
+				firstNode = NULL;
+			}
+
+			else
+			{
+				firstNode = firstNode->next;
+				temp->next = NULL;
+				temp->postNode = NULL;
+				delete temp;
+			}
+		}
+
+		else
+		{
+			Node* prev;
+			for (int i = 0; i < index; i++)
+			{
+				prev = temp;
+				temp = temp->next;
+			}
+			prev->next = temp->next;
+			temp->next = NULL;
+			temp->postNode = NULL;
+			delete temp;
+		}
+		size--;
+	}
+}
+
+void List::removePost(int index)
+{
+	post.remove(index);
+}
+
+void List::removeReply(int index)
+{
+	post.removeReply(index);
+}
+
+void List::printTopic()
+{
+	Node* current = firstNode;
+	for (int i = 0; i < size; i++)
+	{
+		cout << i << "." << current->topic << endl;
+		current = current->next;
+	}
+}
+
+void List::printPost()
+{
+	post.printPost();
+}
+
+void List::printReply()
+{
+	post.printReply();
+}
+
+bool List::isEmpty()
+{
+	if (size == 0)
+	{
+		return true;
+	}
+	return false;
+}
+
+int List::getLength()
+{
+	return size;
+}
 
 
 //int charvalue(char c)

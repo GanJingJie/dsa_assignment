@@ -25,21 +25,21 @@ private:
 public:
 
 	//Constructor
-	Dictionary();
+	List();
 	//Destructor
-	~Dictionary();
+	~List();
 	// add topic to dictionary
 	bool add(ItemType topic, ItemType user);
 	//add post to topic
-	bool addPost(ItemType post);
+	bool addPost(ItemType postStr, ItemType user);
 	//add reply to post
-	bool addReply(ItemType reply);
+	bool addReply(ItemType replyStr, ItemType user);
 	//edit topic at index
-	bool edit(int index, ItemType topic, ItemType user);
+	bool edit(int index, ItemType topic);
 	//edit post at index
-	bool editPost(int index, ItemType post, ItemType user);
+	bool editPost(int index, ItemType postStr);
 	//edit reply at index.
-	bool editReply(int index, ItemType reply, ItemType user);
+	bool editReply(int index, ItemType replyStr);
 	// remove topic from dictionary
 	void remove(int index);
 	// remove post from topic
