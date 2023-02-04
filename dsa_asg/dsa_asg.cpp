@@ -20,6 +20,11 @@ List topicList;
 //Posts postList;
 //Reply replyList;
 
+void deletePost() {
+    
+}
+
+
 void createPost(string username) 
 {
     string post;
@@ -66,7 +71,7 @@ void createTopic(string username) {
         cout << "------------TOPIC------------" << endl;
         cout << "" << endl;
         cout << topicName << endl;
-        cout << "------------------------" << endl;
+        cout << "-----------------------------" << endl;
         cout << "1. Add post" << endl;
         cout << "2. Back to previous menu" << endl;
         cin >> option;
@@ -109,15 +114,15 @@ void viewTopics(string username) {
         cin >> choice;
         cin.ignore(numeric_limits<streamsize>::max(), '\n');
 
-        if (choice == 1) {
+        if (choice == "1") {
             createTopic(username);
         }
 
-        else if (choice == 2) {
+        else if (choice == "2") {
             createPost(username);
         }
 
-        else if (choice == 0) {
+        else if (choice == "0") {
             success = 0;
         }
         else
@@ -129,7 +134,7 @@ void viewTopics(string username) {
 
 void ForumPage(string username) {
     bool success = true;
-    int choice = 0;
+    string choice = 0;
     while (success){
         cout << "------------ MENU ------------" << endl;
         cout << "1. View Topics" << endl;
@@ -140,15 +145,15 @@ void ForumPage(string username) {
         cin >> choice;
         cin.ignore(numeric_limits<streamsize>::max(), '\n');
 
-        if (choice == 1) {
+        if (choice == "1") {
             createTopic(username);
         }
 
-        else if (choice == 2) {
+        else if (choice == "2") {
             viewTopics(username);
         }
 
-        else if (choice == 3) {
+        else if (choice == "3") {
             //viewPost();
         }
 
