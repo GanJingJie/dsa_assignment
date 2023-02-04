@@ -138,7 +138,7 @@ void List::printTopic()
 	Node* current = firstNode;
 	for (int i = 0; i < size; i++)
 	{
-		cout << i << "." << current->topic << "\t\t" << current->user<< endl;
+		cout << i+1 << "." << current->topic << "\t\t" << current->user<< endl;
 		current = current->next;
 	}
 }
