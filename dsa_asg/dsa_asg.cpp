@@ -17,8 +17,8 @@ string username, password, fileName, existingUser, Password;
 ofstream write;
 ifstream read;
 List topicList;
-Posts postList;
-Reply replyList;
+//Posts postList;
+//Reply replyList;
 
 void createPost(string username) 
 {
