@@ -2,7 +2,9 @@
 #include <string>
 #include <fstream>
 #include <stdlib.h>
-#include "Dictionary.h"
+#include "List.h"
+#include "Posts.h"
+#include "Reply.h"
 using namespace std;
 
 void getPassword();
@@ -14,7 +16,7 @@ int lineNo = 1;
 string username, password, fileName, existingUser, Password;
 ofstream write;
 ifstream read;
-Dictionary topicList;
+List topicList;
 Posts postList;
 Reply replyList;
 
