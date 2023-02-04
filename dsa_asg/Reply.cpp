@@ -12,7 +12,7 @@ Reply::Reply()
 
 Reply::~Reply()
 {
-	while (!isEmpty)
+	while (!isEmpty())
 	{
 		remove(0);
 	}

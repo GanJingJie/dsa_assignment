@@ -9,7 +9,7 @@ typedef string ItemType;
 class Posts
 {
 private:
-
+	Reply* reply;
 	struct postNode
 	{
 		ItemType post;
@@ -17,8 +17,6 @@ private:
 		Reply* reply;
 		postNode* next;
 	};
-
-	Reply* replyNode;
 	postNode* firstNode;
 	int size;
 
@@ -30,11 +28,11 @@ public:
 	//add post to the list.
 	bool add(ItemType post, ItemType user);
 	// add reply to a post.
-	bool addReply(ItemType reply, ItemType user);
+	bool addReply(ItemType replyStr, ItemType user);
 	//user selects the post they want to edit. the selected one will be the index.
 	bool edit(int index, ItemType post);
 	//edit a reply with index of the replies
-	bool editReply(int index, ItemType reply);
+	bool editReply(int index, ItemType replyStr);
 	//remove post at the specific index
 	void remove(int index);
 	//remove a reply with the reply index.

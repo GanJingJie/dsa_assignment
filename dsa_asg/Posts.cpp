@@ -5,6 +5,7 @@ using namespace std;
 
 Posts::Posts() 
 {
+	reply = NULL;
 	firstNode = NULL;
 	size = 0;
 }
@@ -13,7 +14,7 @@ Posts::~Posts()
 {
 	postNode* current = firstNode;
 
-	while (!isEmpty)
+	while (!isEmpty())
 	{
 		remove(0);
 	}
@@ -47,9 +48,9 @@ bool Posts::add(ItemType post, ItemType user)
 	return true;
 }
 
-bool Posts::addReply(ItemType reply, ItemType user)
+bool Posts::addReply(ItemType replyStr, ItemType user)
 {
-	replyNode->add(reply, user);
+	reply->add(replyStr, user);
 	return true;
 }
 
@@ -75,14 +76,14 @@ bool Posts::edit(int index, ItemType post)
 	return true;
 }
 
-bool Posts::editReply(int index, ItemType reply)
+bool Posts::editReply(int index, ItemType replyStr)
 {
-	replyNode->edit(index, reply);
+	reply->edit(index, replyStr);
 }
 
 void Posts::removeReply(int index)
 {
-	replyNode->remove(index);
+	reply->remove(index);
 }
 
 // Deleting at index
@@ -151,5 +152,5 @@ void Posts::printPost()
 
 void Posts::printReply()
 {
-	replyNode->printReply();
+	reply->printReply();
 }

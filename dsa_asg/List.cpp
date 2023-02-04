@@ -12,7 +12,7 @@ List::List()
 
 List::~List()
 {
-	while (!isEmpty)
+	while (!isEmpty())
 	{
 		remove(0);
 	}

@@ -290,8 +290,8 @@ void Register() {
 
 int main()
 {
-    int opt;
-    string username, password, fileName;
+    
+    string username, password, fileName, opt;
     ofstream outFile;
     ifstream inFile;
     do {
@@ -305,17 +305,17 @@ int main()
         cin >> opt;
         cin.ignore(numeric_limits<streamsize>::max(), '\n');
 
-        if (opt == 1) {
+        if (opt == "1") {
             Register();
-            opt = 0;
+            opt = "0";
         }
 
-        else if (opt == 2) {
+        else if (opt == "2") {
             logIn();
-            opt = 0;
+            opt = "0";
         }
 
-        else if (opt == 3) {
+        else if (opt == "3") {
             exit;
         }
 
@@ -324,5 +324,5 @@ int main()
         }
     }
 
-    while (opt != 0);
+    while (opt != "0");
 }
