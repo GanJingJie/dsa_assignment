@@ -143,7 +143,7 @@ void Posts::printPost()
 	postNode* current = firstNode;
 	for (int i = 0; i < size; i++)
 	{
-		cout << i << "." << current->post << endl;
+		cout << i << "." << current->post << "\t\t" << current->user << endl;
 		current = current->next;
 	}
 

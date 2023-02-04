@@ -121,7 +121,7 @@ void Reply::printReply()
 	replyNode* current = firstNode;
 	for (int i = 0; i < size; i++)
 	{
-		cout << "\t"<< i << "." << current->reply << endl;
+		cout << "\t"<< i << "." << current->reply << "\t\t" << current->user << endl;
 		current = current->replyNext;
 	}
 }
