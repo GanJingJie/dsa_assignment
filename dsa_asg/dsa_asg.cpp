@@ -100,26 +100,18 @@ void viewTopics(string username) {
     cout << "------------------------------" << endl;
 
     while (success) {
-        cout << "------------ MENU ------------" << endl;
-        cout << "1. Create Topic" << endl;
-        cout << "2. Create Post" << endl;
-        cout << "0. Log Out" << endl;
-        cout << "------------------------------" << endl;
-        cout << "Your choice: ";
+
+        cout << "Your choice of Topic(enter 0 to exit): ";
         cin >> choice;
         cin.ignore(numeric_limits<streamsize>::max(), '\n');
-
-        if (choice == 1) {
-            createTopic(username);
-        }
-
-        else if (choice == 2) {
-            createPost(username);
-        }
-
-        else if (choice == 0) {
+        
+        if (choice == 0)
+        {
             success = 0;
-            break;
+        }
+        else
+        {
+            //viewPost(choice);
         }
     }
 }
