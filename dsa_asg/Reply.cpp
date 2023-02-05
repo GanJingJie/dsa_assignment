@@ -20,9 +20,9 @@ Reply::~Reply()
 
 bool Reply::add(Itemtype reply, Itemtype user)
 {
-	replyNode* newNode = new replyNode;
+	Node* newNode = new Node;
 	newNode->reply = reply;
-	newNode->replyNext = NULL;
+	newNode->next = NULL;
 	newNode->user = user;
 
 	if (size == 0)
@@ -32,13 +32,13 @@ bool Reply::add(Itemtype reply, Itemtype user)
 
 	else
 	{
-		replyNode* temp = firstNode;
-		while (temp->replyNext != NULL)
+		Node* temp = firstNode;
+		while (temp->next != NULL)
 		{
-			temp = temp->replyNext;
+			temp = temp->next;
 
 		}
-		temp->replyNext = newNode;
+		temp->next = newNode;
 
 	}
 	size++;
@@ -57,16 +57,17 @@ bool Reply::edit(int index, Itemtype reply)
 
 		else
 		{
-			replyNode* temp = firstNode;
+			Node* temp = firstNode;
 			for (int i = 0; i < index; i++)
 			{
-				temp = temp->replyNext;
+				temp = temp->next;
 
 			}
 			temp->reply = reply;
 		}
 		return true;
 	}
+	return false;
 }
 
 
@@ -75,7 +76,7 @@ void Reply::remove(int index)
 {
 	if (size > index)
 	{
-		replyNode* temp = firstNode;
+		Node* temp = firstNode;
 		if (index == 0)
 		{
 			if (size == 1)
@@ -85,22 +86,22 @@ void Reply::remove(int index)
 
 			else
 			{
-				firstNode = firstNode->replyNext;
-				temp->replyNext = NULL;
+				firstNode = firstNode->next;
+				temp->next = NULL;
 				delete temp;
 			}
 		}
 
 		else
 		{
-			replyNode* prev = firstNode;
+			Node* prev = firstNode;
 			for (int i = 0; i < index; i++)
 			{
 				prev = temp;
-				temp = temp->replyNext;
+				temp = temp->next;
 			}
-			prev->replyNext = temp->replyNext;
-			temp->replyNext = NULL;
+			prev->next = temp->next;
+			temp->next = NULL;
 			delete temp;
 		}
 		size--;
@@ -114,14 +115,32 @@ bool Reply::isEmpty()
 	{
 		return true;
 	}
+	return false;
+}
+
+bool Reply::getReply(Itemtype& reply, int index)//index starts from 0
+{
+	if (size > index)
+	{
+		Node* current = firstNode;
+
+		for (int i = 0; i < index; i++)
+		{
+			current = current->next;
+		}
+		reply = current->reply;
+		return true;
+	}
+	return false;
+	
 }
 
 void Reply::printReply()
 {
-	replyNode* current = firstNode;
+	Node* current = firstNode;
 	for (int i = 0; i < size; i++)
 	{
 		cout << "\t"<< i+1 << "." << current->reply << "\t\t" << current->user << endl;
-		current = current->replyNext;
+		current = current->next;
 	}
 }

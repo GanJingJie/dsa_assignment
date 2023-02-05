@@ -5,14 +5,13 @@ using namespace std;
 
 Posts::Posts() 
 {
-	reply = NULL;
 	firstNode = NULL;
 	size = 0;
 }
 
 Posts::~Posts()
 {
-	postNode* current = firstNode;
+	Node* current = firstNode;
 
 	while (!isEmpty())
 	{
@@ -23,11 +22,11 @@ Posts::~Posts()
 // Adding to end of list
 bool Posts::add(ItemType post, ItemType user) 
 {
-	postNode* newNode = new postNode;
+	Node* newNode = new Node;
 	newNode->next = NULL;
 	newNode->post = post;
 	newNode->user = user;
-	newNode->reply = NULL;
+	newNode->replyNode = NULL;
 
 	if (size == 0)
 	{
@@ -36,7 +35,7 @@ bool Posts::add(ItemType post, ItemType user)
 
 	else
 	{
-		postNode* temp = firstNode;
+		Node* temp = firstNode;
 		while (temp->next != NULL)
 		{
 			temp = temp->next;
@@ -48,51 +47,68 @@ bool Posts::add(ItemType post, ItemType user)
 	return true;
 }
 
-bool Posts::addReply(ItemType replyStr, ItemType user)
+bool Posts::addReply(int postIndex, ItemType replyStr, ItemType user)
 {
-	reply->add(replyStr, user);
+	if (size > 0)
+	{
+		Node* current = firstNode;
+		for (int i = 0; i < postIndex; i++)
+		{
+			current = current->next;
+		}
+		current->replyNode->add(replyStr, user);
+		
+	}
 	return true;
 }
 
 // Adding to middle of list
-bool Posts::edit(int index, ItemType post) 
+bool Posts::edit(int postIndex, ItemType post) 
 {
-	if (size > index)
+	if (size > postIndex)
 	{
-		if (index == 0)
+		if (postIndex == 0)
 		{
 			firstNode->post = post;
 		}
 		else
 		{
-			postNode* temp = firstNode;
-			for (int i = 0; i < size; i++)
+			Node* current = firstNode;
+			for (int i = 0; i < postIndex; i++)
 			{
-				temp = temp->next;
+				current = current->next;
 			}
-			temp->post = post;
+			current->post = post;
 		}
 	}
 	return true;
 }
 
-bool Posts::editReply(int index, ItemType replyStr)
+bool Posts::editReply(int postIndex, int replyIndex, ItemType replyStr)
 {
-	return reply->edit(index, replyStr);
+	if (size > postIndex)
+	{
+		Node* current = firstNode;
+
+		for (int i = 0; i < postIndex; i++)
+		{
+			current = current->next;
+		}
+		current->replyNode->edit(replyIndex, replyStr);
+		return true;
+	}
+	return false;
 }
 
-void Posts::removeReply(int index)
-{
-	reply->remove(index);
-}
+
 
 // Deleting at index
-void Posts::remove(int index) 
+void Posts::remove(int postIndex) 
 {
-	if (size > index)
+	if (size > postIndex)
 	{
-		postNode* temp = firstNode;
-		if (index == 0)
+		Node* current = firstNode;
+		if (postIndex == 0)
 		{
 			if (size == 1)
 			{
@@ -102,28 +118,43 @@ void Posts::remove(int index)
 			else
 			{
 				firstNode = firstNode->next;
-				temp->next = NULL;
-				temp->reply = NULL;
-				delete temp;
+				current->next = NULL;
+				current->replyNode = NULL;
+				delete current;
 			}
 		}
 
 		else
 		{
-			postNode* prev = temp;
-			for (int i = 0; i < index; i++)
+			Node* prev = current;
+			for (int i = 0; i < postIndex; i++)
 			{
-				prev = temp;
-				temp = temp->next;
+				prev = current;
+				current = current->next;
 			}
-			prev->next = temp->next;
-			temp->next = NULL;
-			temp->reply = NULL;
-			delete temp;
+			prev->next = current->next;
+			current->next = NULL;
+			current->replyNode = NULL;
+			delete current;
 		}
 		size--;
 	}
 	
+}
+
+void Posts::removeReply(int postIndex, int replyIndex)
+{
+	if (size > postIndex)
+	{
+		Node* current = firstNode;
+
+		for (int i = 0; i < postIndex; i++)
+		{
+			current = current->next;
+		}
+		current->replyNode->remove(replyIndex);
+		
+	}
 }
 
 // Checking isEmpty
@@ -141,7 +172,7 @@ bool Posts::isEmpty()
 
 void Posts::printPost()
 {
-	postNode* current = firstNode;
+	Node* current = firstNode;
 	for (int i = 0; i < size; i++)
 	{
 		cout << i+1 << "." << current->post << "\t\t" << current->user << endl;
@@ -150,13 +181,17 @@ void Posts::printPost()
 
 }
 
-void Posts::printReply(int index)
+void Posts::printPostReply(int postIndex)
 {
-	postNode* current = firstNode;
-	for (int i = 0; i < index; i++)
+	if (size > postIndex)
 	{
-		current = current->next;
+		Node* current = firstNode;
+		for (int i = 0; i < postIndex; i++)
+		{
+			current = current->next;
+		}
+		cout << current->post << "\t\t" << current->user << endl;
+		current->replyNode->printReply();
 	}
-	cout << current->post << endl;
-	current->reply->printReply();
+
 }

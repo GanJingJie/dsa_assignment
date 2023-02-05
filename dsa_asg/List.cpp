@@ -44,53 +44,92 @@ bool List::add(ItemType topic, ItemType user)
 	return true;
 }
 
-bool List::addPost(ItemType postStr, ItemType user)
+bool List::addPost(int topicIndex, ItemType postStr, ItemType user)
 {
-	return post.add(postStr, user);
-}
-
-bool List::addReply(ItemType replyStr, ItemType user)
-{
-	return post.addReply(replyStr, user);
-}
-
-bool List::edit(int index, ItemType topic)
-{
-	if (size > index)
+	if (size > topicIndex)
 	{
-		if (index == 0)
+		Node* current = firstNode;
+		for (int i = 0; i < topicIndex; i++)
+		{
+			current = current->next;
+		}
+		current->postNode->add(postStr, user);
+		return true;
+	}
+}
+
+bool List::addReply(int topicIndex, int postIndex, ItemType replyStr, ItemType user)
+{
+	if (size > topicIndex)
+	{
+		Node* current = firstNode;
+		for (int i = 0; i < topicIndex; i++)
+		{
+			current = current->next;
+		}
+		current->postNode->addReply(postIndex, replyStr, user);
+		return true;
+	}
+}
+
+bool List::edit(int topicIndex, ItemType topic)
+{
+	if (size > topicIndex)
+	{
+		if (topicIndex == 0)
 		{
 			firstNode->topic = topic;
 		}
 		else
 		{
 			Node* temp = firstNode;
-			for (int i = 0; i < size; i++)
+			for (int i = 0; i < topicIndex; i++)
 			{
 				temp = temp->next;
 			}
 			temp->topic = topic;
 		}
+		return true;
 	}
-	return true;
+	return false;
 }
 
-bool List::editPost(int index, ItemType postStr)
+bool List::editPost(int topicIndex, int postIndex, ItemType postStr)
 {
-	return post.edit(index, postStr);
+	if (size > topicIndex)
+	{
+		Node* current = firstNode;
+		for (int i = 0; i < topicIndex; i++)
+		{
+			current = current->next;
+		}
+		current->postNode->edit(postIndex, postStr);
+		return true;
+	}
+	return false;
 }
 
-bool List::editReply(int index, ItemType replyStr)
+bool List::editReply(int topicIndex, int postIndex, int replyIndex, ItemType replyStr)
 {
-	return post.editReply(index, replyStr);
+	if (size > topicIndex)
+	{
+		Node* current = firstNode;
+		for (int i = 0; i < topicIndex; i++)
+		{
+			current = current->next;
+		}
+		current->postNode->editReply(postIndex, replyIndex, replyStr);
+		return true;
+	}
+	return false;
 }
 
-void List::remove(int index)
+void List::remove(int topicIndex)
 {
-	if (size > index)
+	if (size > topicIndex)
 	{
 		Node* temp = firstNode;
-		if (index == 0)
+		if (topicIndex == 0)
 		{
 			if (size == 1)
 			{
@@ -109,7 +148,7 @@ void List::remove(int index)
 		else
 		{
 			Node* prev = firstNode;
-			for (int i = 0; i < index; i++)
+			for (int i = 0; i < topicIndex; i++)
 			{
 				prev = temp;
 				temp = temp->next;
@@ -123,14 +162,31 @@ void List::remove(int index)
 	}
 }
 
-void List::removePost(int index)
+void List::removePost(int topicIndex, int postIndex)
 {
-	post.remove(index);
+	if (size > topicIndex)
+	{
+		Node* current = firstNode;
+		for (int i = 0; i < topicIndex; i++)
+		{
+			current = current->next;
+		}
+		current->postNode->remove(postIndex);
+		
+	}
 }
 
-void List::removeReply(int index)
+void List::removeReply(int topicIndex, int postIndex, int replyIndex)
 {
-	post.removeReply(index);
+	if (size > topicIndex)
+	{
+		Node* current = firstNode;
+		for (int i = 0; i < topicIndex; i++)
+		{
+			current = current->next;
+		}
+		current->postNode->removeReply(postIndex, replyIndex);
+	}
 }
 
 void List::printTopic()
@@ -143,14 +199,31 @@ void List::printTopic()
 	}
 }
 
-void List::printPost()
+void List::printTopicPost(int topicIndex)
 {
-	post.printPost();
+	if (size > topicIndex)
+	{
+		Node* current = firstNode;
+		for (int i = 0; i < topicIndex; i++)
+		{
+			current = current->next;
+		}
+		cout << current->topic << '\t\t' << current->user << endl;
+		current->postNode->printPost();
+	}
 }
 
-void List::printReply(int index)
+void List::printPostReply(int topicIndex, int postIndex)
 {
-	post.printReply(index);
+	if (size > topicIndex)
+	{
+		Node* current = firstNode;
+		for (int i = 0; i < topicIndex; i++)
+		{
+			current = current->next;
+		}
+		current->postNode->printPostReply(postIndex);
+	}
 }
 
 bool List::isEmpty()
@@ -168,135 +241,3 @@ int List::getLength()
 }
 
 
-//int charvalue(char c)
-//{
-//	if (isalpha(c))
-//	{
-//		if (isupper(c))
-//			return (int)c - (int)'A';
-//		else
-//			return (int)c - (int)'a' + 26;
-//	}
-//	else
-//		return -1;
-//}
-//
-//Dictionary::Dictionary()
-//{
-//	for (int i = 0; i < max_size; i++)
-//	{
-//		items[i] = NULL;
-//	}
-//	size = 0;
-//}
-//
-//Dictionary::~Dictionary() {
-//	// Deconstructor required
-//}
-//
-//int Dictionary::hash(KeyType key)
-//{
-//	int strvalue = NULL;
-//	for (int i = 1; i < key.length(); i++)
-//	{
-//		strvalue += charvalue(key[i]);
-//	}
-//
-//	return strvalue;
-//}
-//
-//bool Dictionary::add(KeyType nKey, ItemType nUser)
-//{
-//	int value = hash(nKey);
-//	if (items[value] == NULL)
-//	{
-//		Node* newNode = new Node();
-//		newNode->key = nKey;
-//		newNode->user = nUser;
-//		newNode->post = NULL;
-//		newNode->next = NULL;
-//
-//		items[value] = newNode;
-//	}
-//
-//	else
-//	{
-//		Node* temp = items[value];
-//		if (temp->key == nKey)
-//		{
-//			return false;
-//		}
-//
-//		while (temp->next != NULL)
-//		{
-//			if (temp->key == nKey)
-//			{
-//				return false;
-//			}
-//
-//			temp = temp->next;
-//		}
-//
-//		Node* newNode = new Node();
-//		newNode->key = nKey;
-//		newNode->user = nUser;
-//		newNode->post = NULL;
-//		newNode->key = nKey;
-//		items[value] = newNode;
-//		temp->next = newNode;
-//	}
-//
-//	size++;
-//	cout << "Topic created successfully!" << endl;
-//	return true;
-//}
-//
-//void Dictionary::remove(KeyType key)
-//{
-//	int value = hash(key);
-//	if (items[value] != NULL)
-//	{
-//		Node* temp = items[value];
-//		items[value] = NULL;
-//		delete temp;
-//		size--;
-//	}
-//}
-//
-//postNode *Dictionary::getPost(KeyType key)
-//{
-//	int value = hash(key);
-//	if (items[value] != NULL)
-//	{
-//		return items[value]->post;
-//	}
-//
-//}
-//
-//bool Dictionary::isEmpty()
-//{
-//	if (size == 0)
-//	{
-//		return true;
-//	}
-//	else
-//		return false;
-//}
-//
-//int Dictionary::getLength()
-//{
-//	return size;
-//}
-//
-//void Dictionary::printTopic()
-//{
-//	int count = 1;
-//	for (int i = 0; i < max_size; i++)
-//	{
-//		if (items[i] != NULL)
-//		{
-//			cout << count << ". " << items[i]->key << endl;
-//			count++;
-//		}
-//	}
-//}

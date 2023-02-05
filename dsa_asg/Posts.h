@@ -9,15 +9,14 @@ typedef string ItemType;
 class Posts
 {
 private:
-	Reply* reply;
-	struct postNode
+	struct Node
 	{
 		ItemType post;
 		ItemType user;
-		Reply* reply;
-		postNode* next;
+		Reply* replyNode;
+		Node* next;
 	};
-	postNode* firstNode;
+	Node* firstNode;
 	int size;
 
 public:
@@ -25,23 +24,24 @@ public:
 	Posts();
 	//destructor
 	~Posts();
-	//add post to the list.
+	//add post to the list. to the back
 	bool add(ItemType post, ItemType user);
-	// add reply to a post.
-	bool addReply(ItemType replyStr, ItemType user);
+	// add reply 
+	bool addReply(int postIndex, ItemType replyStr, ItemType user);
 	//user selects the post they want to edit. the selected one will be the index.
-	bool edit(int index, ItemType post);
+	bool edit(int postIndex, ItemType post);
 	//edit a reply with index of the replies
-	bool editReply(int index, ItemType replyStr);
+	bool editReply(int postIndex, int replyIndex, ItemType replyStr);
 	//remove post at the specific index
-	void remove(int index);
+	void remove(int postIndex);
 	//remove a reply with the reply index.
-	void removeReply(int index);
+	void removeReply(int postIndex, int replyIndex);
 	//check if the topic is empty
 	bool isEmpty();
 	//print out all the post on the specific topic
 	void printPost();
-	//print out all the replies on the post(with its index).
-	void printReply(int index);
+	//print out the selected post and the replies
+	void printPostReply(int postIndex);
+	
 };
 

@@ -18,7 +18,6 @@ private:
 		Node* next;
 	};
 
-	Posts post;
 	Node* firstNode;
 	int  size;
 
@@ -28,30 +27,30 @@ public:
 	List();
 	//Destructor
 	~List();
-	// add topic to dictionary
+	// add a new topic to the list.
 	bool add(ItemType topic, ItemType user);
-	//add post to topic
-	bool addPost(ItemType postStr, ItemType user);
-	//add reply to post
-	bool addReply(ItemType replyStr, ItemType user);
-	//edit topic at index
-	bool edit(int index, ItemType topic);
-	//edit post at index
-	bool editPost(int index, ItemType postStr);
-	//edit reply at index.
-	bool editReply(int index, ItemType replyStr);
-	// remove topic from dictionary
-	void remove(int index);
-	// remove post from topic
-	void removePost(int index);
-	// remove reply from post
-	void removeReply(int index);
+	//add post to the selected topic.
+	bool addPost(int topicIndex, ItemType postStr, ItemType user);
+	//add reply to selected post of the selected topic
+	bool addReply(int topicIndex, int postIndex, ItemType replyStr, ItemType user);
+	//edit topic with index
+	bool edit(int topicIndex, ItemType topic);
+	//edit post of selected topic
+	bool editPost(int topicIndex, int postIndex, ItemType postStr);
+	//edit reply of selected post 
+	bool editReply(int topicIndex, int postIndex, int replyIndex, ItemType replyStr);
+	// remove topic from topicList at index. index starts with 0
+	void remove(int topicIndex);
+	// remove selected post from topic
+	void removePost(int topicIndex, int postIndex);
+	// remove selected reply from selected post
+	void removeReply(int topicIndex, int postIndex, int replyIndex);
 	// print all topics
 	void printTopic();
-	// print all posts
-	void printPost();
-	// print all replies
-	void printReply(int index);
+	// print all post of selected topic
+	void printTopicPost(int topicIndex);
+	// print all replies of selected post
+	void printPostReply(int topicIndex, int postIndex);
 	// check if dictionary is empty
 	bool isEmpty();
 	// return int of dictionary length

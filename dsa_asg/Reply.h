@@ -10,28 +10,30 @@ class Reply
 {
 private:
 
-	struct replyNode 
+	struct Node 
 	{
 		Itemtype reply;
 		Itemtype user;
-		replyNode* replyNext;
+		Node* next;
 	};
 	
-	replyNode* firstNode;
+	Node* firstNode;
 	int size;
 
 public:
 	Reply();
 	~Reply();
 
-	//add reply
+	//add reply 
 	bool add(Itemtype reply, Itemtype user);
-	//edit a reply with the index of the reply
+	//edit a reply with the index of the reply, index starts with 0
 	bool edit(int index, Itemtype reply);
-	//remove a reply
+	//remove a reply index starts with 0
 	void remove(int index);
 	//check if post has a reply
 	bool isEmpty();
+	//get the reply string 
+	bool getReply(Itemtype& reply, int index);
 	//print out all the replies for a post
 	void printReply();
 };
