@@ -11,6 +11,7 @@ using namespace std;
 void getPassword();
 void Register();
 void logIn();
+void viewPost(int index, string username);
 int main();
 
 int lineNo = 1;
@@ -341,10 +342,11 @@ void logInCheck() {
 
 void getPassword() {
     read.open("Passwords.txt");
-    while (lineNo > 1) {
+    while (lineNo > 0) {
         getline(read, Password);
         lineNo--;
     }
+    cout << Password;
     read.close();
 }
 
