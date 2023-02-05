@@ -55,5 +55,9 @@ public:
 	bool isEmpty();
 	// return int of dictionary length
 	int getLength();
+	//get the topic string
+	ItemType getTopic(int topicIndex);
+	//get the user string
+	ItemType getUser(int topicIndex);
 
 };

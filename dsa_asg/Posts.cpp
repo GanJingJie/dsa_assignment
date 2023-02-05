@@ -195,3 +195,37 @@ void Posts::printPostReply(int postIndex)
 	}
 
 }
+
+ItemType Posts::getPost(int postIndex)
+{
+	if (size > postIndex)
+	{
+		Node* current = firstNode;
+		for (int i = 0; i < postIndex; i++)
+		{
+			current = current->next;
+		}
+		return current->post;
+	}
+	else
+	{
+		return "0";
+	}
+}
+
+ItemType Posts::getUser(int postIndex)
+{
+	if (size > postIndex)
+	{
+		Node* current = firstNode;
+		for (int i = 0; i < postIndex; i++)
+		{
+			current = current->next;
+		}
+		return current->user;
+	}
+	else
+	{
+		return "0";
+	}
+}

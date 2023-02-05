@@ -144,3 +144,37 @@ void Reply::printReply()
 		current = current->next;
 	}
 }
+
+Itemtype Reply::getReply(int index)
+{
+	if (size > index)
+	{
+		Node* current = firstNode;
+		for (int i = 0; i < index; i++)
+		{
+			current = current->next;
+		}
+		return current->reply;
+	}
+	else
+	{
+		return "0";
+	}
+}
+
+Itemtype Reply::getUser(int index)
+{
+	if (size > index)
+	{
+		Node* current = firstNode;
+		for (int i = 0; i < index; i++)
+		{
+			current = current->next;
+		}
+		return current->user;
+	}
+	else
+	{
+		return "0";
+	}
+}

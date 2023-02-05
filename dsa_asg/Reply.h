@@ -36,5 +36,9 @@ public:
 	bool getReply(Itemtype& reply, int index);
 	//print out all the replies for a post
 	void printReply();
+	//get the reply string.
+	Itemtype getReply(int index);
+	//get the user string.
+	Itemtype getUser(int index);
 };
 

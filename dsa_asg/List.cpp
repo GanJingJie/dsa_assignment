@@ -241,4 +241,36 @@ int List::getLength()
 	return size;
 }
 
+ItemType List::getTopic(int topicIndex)
+{
+	if (size > topicIndex)
+	{
+		Node* current = firstNode;
+		for (int i = 0; i < topicIndex; i++)
+		{
+			current = current->next;
+		}
+		return current->topic;
+	}
+	else
+	{
+		return "0";
+	}
+}
 
+ItemType List::getUser(int topicIndex)
+{
+	if (size > topicIndex)
+	{
+		Node* current = firstNode;
+		for (int  i = 0; i < topicIndex; i++)
+		{
+			current = current->next;
+		}
+		return current->user;
+	}
+	else
+	{
+		return "0";
+	}
+}

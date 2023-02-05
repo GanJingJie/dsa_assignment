@@ -42,6 +42,11 @@ public:
 	void printPost();
 	//print out the selected post and the replies
 	void printPostReply(int postIndex);
+	//get the post string
+	ItemType getPost(int postIndex);
+	//get the user string
+	Itemtype getUser(int postIndex);
+	
 	
 };
 
