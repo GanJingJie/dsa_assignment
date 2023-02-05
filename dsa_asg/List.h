@@ -51,7 +51,7 @@ public:
 	// print all posts
 	void printPost();
 	// print all replies
-	void printReply();
+	void printReply(int index);
 	// check if dictionary is empty
 	bool isEmpty();
 	// return int of dictionary length

@@ -150,7 +150,13 @@ void Posts::printPost()
 
 }
 
-void Posts::printReply()
+void Posts::printReply(int index)
 {
-	reply->printReply();
+	postNode* current = firstNode;
+	for (int i = 0; i < index; i++)
+	{
+		current = current->next;
+	}
+	cout << current->post << endl;
+	current->reply->printReply();
 }

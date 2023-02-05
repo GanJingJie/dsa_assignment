@@ -41,7 +41,7 @@ public:
 	bool isEmpty();
 	//print out all the post on the specific topic
 	void printPost();
-	//print out all the replies on the post.
-	void printReply();
+	//print out all the replies on the post(with its index).
+	void printReply(int index);
 };
 

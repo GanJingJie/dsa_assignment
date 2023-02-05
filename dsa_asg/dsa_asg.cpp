@@ -35,15 +35,12 @@ void deletePost() {
 
     string topicIndex;
 
-    cout << "----------- TOPICS -----------" << endl;
-    topicList.printTopic();
-    cout << "------------------------------" << endl;
     cout << "Which topic would you like to delete the post from: " << endl;
     getline(cin, topicIndex);
 
     if (isNumeric(topicIndex)) {
         int index = stoi(topicIndex);
-        topicList.removePost(index);
+        topicList.removePost(index-1);//minus 1 because index starts from 0 and displays it from 1
     }
    
 }
@@ -130,55 +127,98 @@ void viewTopics(string username) {
 
     while (success) {
         cout << "------------ MENU ------------" << endl;
-        cout << "1. Create Topic" << endl;
-        cout << "2. Create Post" << endl;
-        cout << "0. Log Out" << endl;
+        cout << "1. Select Topic to view" << endl;
+        cout << "0. Back" << endl;
         cout << "------------------------------" << endl;
         cout << "Your choice: ";
         cin >> choice;
         cin.ignore(numeric_limits<streamsize>::max(), '\n');
 
         if (choice == "1") {
-            createTopic(username);
-        }
-
-        else if (choice == "2") {
-            createPost(username);
+            viewPost(stoi(choice), username);
         }
 
         else if (choice == "0") {
-            success = 0;
+            success = 0;//break the loop and return to the previous method.
         }
         else
         {
-            viewPost(choice, username);
+            success = 1;//continue the loop
+        }
+    }
+}
+
+void viewReply(int index)
+{
+    string choice;
+    bool success = true;
+    string reply;
+
+    while (success)
+    {
+        //printing of post and the replies
+        topicList.printReply(index);//this first print out the post then the replies.
+
+        cout << "1.Add reply" << endl;
+        cout << "2.Delete reply" << endl;
+        cout << "3.Back" << endl;
+        cin >> choice;
+        cin.ignore(numeric_limits<streamsize>::max(), '\n');
+
+        if (choice == "1")
+        {
+            string replyStr;
+            cout << "Enter your reply:" << endl;
+            getline(cin, replyStr);
+
+
+
         }
     }
 }
 
 void viewPost(int index, string username)
 {
-    int choice;
+    string choice;
     bool success = true;
     string post;
-    cout << "-----------POSTS-----------" << endl;
-    topicList.printPost();
-    cout << "---------------------------" << endl;
 
     while (success)
     {
-        cout << "Your choice of Topic(enter 0 to exit): ";
+        //printing of the all the posts
+        cout << "-----------POSTS-----------" << endl;
+        topicList.printPost();
+        cout << "---------------------------" << endl;
+
+        //listing all the options
+        cout << "1.Add a post" << endl;
+        cout << "2.View a post in detail" << endl;
+        cout << "3.Delete your post" << endl;
+        cout << "For all the option choose the index of the post." << endl;
+        cout << "Your Option:" << endl;
         cin >> choice;
         cin.ignore(numeric_limits<streamsize>::max(), '\n');
 
-        if (choice == 0)
+        //what happens to each options
+        if (choice == "1")
         {
-            success = false;
+            string postStr;
+            cout << "Enter your post:" << endl;
+            getline(cin, postStr);
+            topicList.addPost(postStr, username);
+            cout << "" << endl;
+            cout << "Your post has be added" << endl;
+            success = true;
         }
-        else
+
+        else if (choice == "2")//call a method to view the post and replies along with its options
         {
-            
-            //showReplies(post, choice, username);
+            //viewReply
+        }
+
+        else if (choice == "3")//call delete method
+        {
+            deletePost();
         }
 
     }
@@ -200,7 +240,7 @@ void ForumPage(string username) {
     string choice = 0;
     while (success){
         cout << "------------ MENU ------------" << endl;
-        cout << "1. View Topics" << endl;
+        cout << "1. View All Topics" << endl;
         cout << "2. Create Topics" << endl;
         cout << "0. Log Out" << endl;
         cout << "------------------------------" << endl;
@@ -209,15 +249,11 @@ void ForumPage(string username) {
         cin.ignore(numeric_limits<streamsize>::max(), '\n');
 
         if (choice == "1") {
-            createTopic(username);
-        }
-
-        else if (choice == "2") {
             viewTopics(username);
         }
 
-        else if (choice == "3") {
-            //viewPost();
+        else if (choice == "2") {
+            createTopic(username);
         }
 
         else if (choice == "0"){

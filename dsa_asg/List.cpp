@@ -148,9 +148,9 @@ void List::printPost()
 	post.printPost();
 }
 
-void List::printReply()
+void List::printReply(int index)
 {
-	post.printReply();
+	post.printReply(index);
 }
 
 bool List::isEmpty()
