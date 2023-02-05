@@ -446,6 +446,72 @@ void Register() {
     }
 }
 
+void saveTopics()
+{
+    fileName = "Topics.txt";
+    write.open(fileName);
+
+    int len = topicList.getTopicLength();
+
+    for (int t = 0; t < len; t++)
+    {
+        write << topicList.getTopic(len) << '\t';
+        write << topicList.getTopicUser(len) << endl;
+    }
+   
+    write.close();
+}
+
+void savePosts()
+{
+    fileName = "Posts.txt";
+    write.open(fileName);
+
+    int topLen = topicList.getTopicLength();
+    int postLen;
+    for (int t = 0; t < topLen; t++)
+    {
+        write << t << endl;
+        postLen = topicList.getPostLength(t);
+        for (int p = 0; p < postLen; p++)
+        {
+            write << topicList.getPost(t, postLen) << '\t';
+            write << topicList.getPostUser(t, postLen) << endl;
+        }
+
+
+    }
+    write.close();
+    
+}
+
+void saveReply()
+{
+    fileName = "Replies.txt";
+    write.open(fileName);
+
+    int topLen = topicList.getTopicLength();
+    int postLen;
+    int repLen;
+    for (int t = 0; t < topLen; t++)
+    {
+        write << t << '\t';
+        postLen = topicList.getPostLength(t);
+        for (int p = 0; p < postLen; p++)
+        {
+            write << p << '\t';
+            repLen = topicList.getReplyLength(t, p);
+
+            for (int r = 0; r < repLen; r++)
+            {
+                write << topicList.getReply(t, p, r) << '\t';
+                write << topicList.getReplyUser(t, p, r) << endl;
+            }
+        }
+    }
+    write.close();
+}
+
 int main()
 {
     string username, password, fileName, opt;

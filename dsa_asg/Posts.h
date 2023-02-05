@@ -45,8 +45,14 @@ public:
 	//get the post string
 	ItemType getPost(int postIndex);
 	//get the user string
-	Itemtype getUser(int postIndex);
-	
-	
+	Itemtype getPostUser(int postIndex);
+	//get the reply string
+	ItemType getReply(int postIndex, int replyIndex);
+	//get the reply user
+	ItemType getReplyUser(int postIndex, int replyIndex);
+	//get length of post
+	int getPostLength();
+	//get length of reply for post selected
+	int getReplyLength(int postIndex);
 };
 

@@ -53,11 +53,24 @@ public:
 	void printPostReply(int topicIndex, int postIndex);
 	// check if linked list is empty
 	bool isEmpty();
-	// return linked list length as int
-	int getLength();
+	// return int of dictionary length
+	int getTopicLength();
 	//get the topic string
 	ItemType getTopic(int topicIndex);
-	//get the user string
-	ItemType getUser(int topicIndex);
+	//get the user string for topics
+	ItemType getTopicUser(int topicIndex);
+	//get the post string
+	ItemType getPost(int topicIndex, int postIndex);
+	//get the user string from post
+	ItemType getPostUser(int topicIndex, int postIndex);
+	//get the reply string 
+	ItemType getReply(int topicIndex, int postIndex, int replyIndex);
+	//get the user string from reply
+	ItemType getReplyUser(int topicIndex, int postIndex, int replyIndex);
+	//get length of post selected
+	int getPostLength(int topicIndex);
+	//get length of reply from post selected
+	int getReplyLength(int topicIndex, int postIndex);
+
 
 };
