@@ -173,6 +173,7 @@ void List::removePost(int topicIndex, int postIndex)
 		}
 		current->postNode->remove(postIndex);
 		
+		cout << "Post successfully removed" << endl << endl;
 	}
 }
 

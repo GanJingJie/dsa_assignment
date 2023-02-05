@@ -36,14 +36,34 @@ bool isNumeric(string str) {
 
 void deletePost() {
 
-    string topicIndex;
+    string topicIndex, postIndex;
+    bool success = 1, yes = 1;
 
-    cout << "Which topic would you like to delete the post from: " << endl;
-    getline(cin, topicIndex);
+    while (success) {
+        cout << "Which topic would you like to delete the post from: " << endl;
+        getline(cin, topicIndex);
 
-    if (isNumeric(topicIndex)) {
-        int index = stoi(topicIndex);
-        topicList.removePost(index-1);//minus 1 because index starts from 0 and displays it from 1
+        if (isNumeric(topicIndex)) {
+            int tIndex = stoi(topicIndex);
+            success = 0;
+            while (yes){
+                cout << "----------- POSTS -----------" << endl;
+                topicList.printTopicPost(tIndex);
+                cout << "-----------------------------" << endl;
+                cout << "Enter the post you would like to delete: " << endl;
+                getline(cin, postIndex);
+
+                if (isNumeric(postIndex)) {
+                    int pIndex = stoi(postIndex);
+                    yes = 0;
+                    topicList.removePost(tIndex, pIndex);
+                }
+
+                else {
+                    cout << "Please input a valid post" << endl;
+                }
+            }     
+        }
     }
    
 }
@@ -51,7 +71,7 @@ void deletePost() {
 
 void createPost(string username) 
 {
-    string post;
+    string post, option;
     cout << "=============Post=============" << endl;
     cout << "Enter your post:" << endl;
     getline(cin, post);
@@ -60,13 +80,13 @@ void createPost(string username)
     //postList.printPost();
 
     bool inPost = true;
-    string option;
     while (inPost)
     {
         cout << endl;
         cout << "1. Add another post" << endl;
-        cout << "2. go back to View all topics";
-        cin >> option;
+        cout << "2. go back to View all topics" << endl;
+        cout << "What would you like to do: ";
+        getline(cin, option);
         
         if (isNumeric(option)){
             if (option == "1")
@@ -200,7 +220,7 @@ void viewPost(int index, string username)
     {
         //printing of the all the posts
         cout << "-----------POSTS-----------" << endl;
-        topicList.printPost();
+        topicList.printTopicPost();
         cout << "---------------------------" << endl;
 
         //listing all the options
