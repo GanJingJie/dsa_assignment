@@ -346,7 +346,6 @@ void getPassword() {
         getline(read, Password);
         lineNo--;
     }
-    cout << Password;
     read.close();
 }
 
