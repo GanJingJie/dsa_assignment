@@ -22,6 +22,7 @@ List topicList;
 
 // Function to check if input is integer
 bool isNumeric(string str) {
+
     for (int i = 0; i < str.length(); i++) {
         if (isdigit(str[i]) == false) {
             return false;
@@ -67,17 +68,24 @@ void createPost(string username)
         cout << "1. Add another post" << endl;
         cout << "2. go back to View all topics";
         cin >> option;
+        
+        if (isNumeric(option)){
+            if (option == "1")
+            {
+                createPost(username);
+                inPost = false;
+            }
 
-        if (option == "1")
-        {
-            createPost(username);
-            inPost = false;
+            else if (option == "2")
+            {
+                inPost = false;
+            }
         }
 
-        else if (option == "2")
-        {
-            inPost = false;
+        else {
+            cout << "Invalid option please try again" << endl;
         }
+        
     }
 }
 
@@ -101,20 +109,22 @@ void createTopic(string username) {
         cin >> option;
         cin.ignore(numeric_limits<streamsize>::max(), '\n');
 
-        if (option == "1")
-        {
-            createPost(username);
-            inTopic = false;
-        }
+        if (isNumeric(option)){
+            if (option == "1")
+            {
+                createPost(username);
+                inTopic = false;
+            }
 
-        else if (option == "2")
-        {
-            inTopic = false;
+            else if (option == "2")
+            {
+                inTopic = false;
+            }
         }
-
+        
         else
         {
-            cout << "invalid option please try again" << endl;
+            cout << "Invalid option please try again" << endl;
         }
     }
 
@@ -138,21 +148,25 @@ void viewTopics(string username) {
         cin >> choice;
         cin.ignore(numeric_limits<streamsize>::max(), '\n');
 
-        if (choice == "1") {
-            createTopic(username);
-        }
+        if (isNumeric(choice)){
+            if (choice == "1") {
+                createTopic(username);
+            }
 
-        else if (choice == "2") {
-            createPost(username);
-        }
+            else if (choice == "2") {
+                createPost(username);
+            }
 
-        else if (choice == "0") {
-            success = 0;
+            else if (choice == "0") {
+                success = 0;
+            }
+            else
+            {
+                int opt = stoi(choice);
+                viewPost(opt, username);
+            }
         }
-        else
-        {
-            viewPost(choice, username);
-        }
+        
     }
 }
 
@@ -208,29 +222,31 @@ void ForumPage(string username) {
         cin >> choice;
         cin.ignore(numeric_limits<streamsize>::max(), '\n');
 
-        if (choice == "1") {
-            createTopic(username);
-        }
+        if (isNumeric(choice)){
+            if (choice == "1") {
+                createTopic(username);
+            }
 
-        else if (choice == "2") {
-            viewTopics(username);
-        }
+            else if (choice == "2") {
+                viewTopics(username);
+            }
 
-        else if (choice == "3") {
-            //viewPost();
-        }
+            else if (choice == "3") {
+                //viewPost();
+            }
 
-        else if (choice == "0"){
-            username = "";
-            password = "";
-            success = false;
-            cout << "Log out successful!" << endl;
-            main();
+            else if (choice == "0") {
+                username = "";
+                password = "";
+                success = false;
+                cout << "Log out successful!" << endl;
+                main();
+            }
         }
 
         else
         {
-            cout << "Invalid choice." << endl;
+            cout << "Invalid option please try again" << endl;
         }
     }
 }
@@ -377,20 +393,22 @@ int main()
         cin >> opt;
         cin.ignore(numeric_limits<streamsize>::max(), '\n');
 
-        if (opt == "1") {
-            Register();
-            opt = "0";
-        }
+        if (isNumeric(opt)){
+            if (opt == "1") {
+                Register();
+                opt = "0";
+            }
 
-        else if (opt == "2") {
-            logIn();
-            opt = "0";
-        }
+            else if (opt == "2") {
+                logIn();
+                opt = "0";
+            }
 
-        else if (opt == "0") {
-            exit;
+            else if (opt == "0") {
+                exit;
+            }
         }
-
+        
         else {
             cout << "Please enter a valid option" << endl;
         }
