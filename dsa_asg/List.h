@@ -51,7 +51,7 @@ public:
 	void printTopicPost(int topicIndex);
 	// print all replies of selected post
 	void printPostReply(int topicIndex, int postIndex);
-	// check if dictionary is empty
+	// check if linked list is empty
 	bool isEmpty();
 	// return int of dictionary length
 	int getTopicLength();
