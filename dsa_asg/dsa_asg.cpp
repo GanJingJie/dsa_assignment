@@ -154,12 +154,21 @@ void createTopic(string username) {
 
 void whichTopic(string username) {
     string opt;
+    bool success = 1;
     cout << "Which topic would you like to view: " << endl;
     getline(cin, opt);
 
-    if (isNumeric(opt)) {
-        viewPost(stoi(opt), username);
+    while (success) {
+        if (isNumeric(opt)) {
+            viewPost(stoi(opt), username);
+            success = 0;
+        }
+
+        else {
+            cout << "Please enter a valid topic" << endl;
+        }
     }
+    
 }
 
 void viewTopics(string username) {
