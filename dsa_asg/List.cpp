@@ -22,10 +22,10 @@ List::~List()
 bool List::add(ItemType topic, ItemType user)
 {
 	Node* newNode = new Node;
-	newNode->next = NULL;
 	newNode->topic = topic;
 	newNode->user = user;
 	newNode->postNode = NULL;
+	newNode->next = NULL;
 
 	if (size == 0)
 	{

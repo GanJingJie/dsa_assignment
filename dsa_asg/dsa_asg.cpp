@@ -122,12 +122,11 @@ void createTopic(string username) {
 
     while (inTopic)
     {
-        cout << "------------TOPIC------------" << endl;
-        cout << "" << endl;
-        cout << topicName << endl;
-        cout << "-----------------------------" << endl;
+        cout << "Topic Name: " << topicName << endl;
+        cout << "----------- MENU -----------" << endl;
         cout << "1. Add post" << endl;
         cout << "2. Back to previous menu" << endl;
+        cout << "----------------------------" << endl;
         cin >> option;
         cin.ignore(numeric_limits<streamsize>::max(), '\n');
 
@@ -192,6 +191,10 @@ void viewTopics(string username) {
         if (isNumeric(choice)){
             if (choice == "1") {
                 whichTopic(username);
+            }
+
+            else if (choice == "2") {
+                createTopic(username);
             }
 
             else if (choice == "0") {
