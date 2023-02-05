@@ -152,6 +152,16 @@ void createTopic(string username) {
 
 }
 
+void whichTopic(string username) {
+    string opt;
+    cout << "Which topic would you like to view: " << endl;
+    getline(cin, opt);
+
+    if (isNumeric(opt)) {
+        viewPost(stoi(opt), username);
+    }
+}
+
 void viewTopics(string username) {
     string choice = 0;
     bool success = 1;
@@ -163,6 +173,7 @@ void viewTopics(string username) {
     while (success) {
         cout << "------------ MENU ------------" << endl;
         cout << "1. Select Topic to view" << endl;
+        cout << "2. Create a Topic" << endl;
         cout << "0. Back" << endl;
         cout << "------------------------------" << endl;
         cout << "Your choice: ";
@@ -171,7 +182,7 @@ void viewTopics(string username) {
 
         if (isNumeric(choice)){
             if (choice == "1") {
-                viewPost(stoi(choice), username);
+                whichTopic(username);
             }
 
             else if (choice == "0") {
