@@ -493,13 +493,14 @@ void saveReply()
     int topLen = topicList.getTopicLength();
     int postLen;
     int repLen;
+
     for (int t = 0; t < topLen; t++)
     {
         write << t << '\t';
         postLen = topicList.getPostLength(t);
         for (int p = 0; p < postLen; p++)
         {
-            write << p << '\t';
+            write << p << endl;
             repLen = topicList.getReplyLength(t, p);
 
             for (int r = 0; r < repLen; r++)
@@ -515,8 +516,6 @@ void saveReply()
 int main()
 {
     string username, password, fileName, opt;
-    ofstream outFile;
-    ifstream inFile;
     do {
         // Menu Print
         cout << "------------ MENU ------------" << endl;
