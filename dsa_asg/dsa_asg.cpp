@@ -267,12 +267,12 @@ void viewPost(int index, string username)
                 success = true;
             }
 
-            else if (choice == "2")//call a method to view the post and replies along with its options
+            else if (choice == "2") //call a method to view the post and replies along with its options
             {
                 viewReply(index, stoi(choice));
             }
 
-            else if (choice == "3")//call delete method
+            else if (choice == "3") //call delete method
             {
                 deletePost();
             }
@@ -282,16 +282,6 @@ void viewPost(int index, string username)
         }
     }
 }
-
-//void showReplies(int index, string username)
-//{
-//    int choice;
-//    bool success = true;
-//    cout << "-----------POSTS-----------" << endl;
-//    topicList.printPost();
-//    cout << "---------------------------" << endl;
-//
-//}
 
 void ForumPage(string username) {
     bool success = true;
