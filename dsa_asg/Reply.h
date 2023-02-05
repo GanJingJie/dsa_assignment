@@ -40,5 +40,7 @@ public:
 	Itemtype getReply(int index);
 	//get the user string.
 	Itemtype getUser(int index);
+	//get the length
+	int getReplyLength();
 };
 

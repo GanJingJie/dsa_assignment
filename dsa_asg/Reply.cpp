@@ -178,3 +178,8 @@ Itemtype Reply::getUser(int index)
 		return "0";
 	}
 }
+
+int Reply::getReplyLength()
+{
+	return size;
+}

@@ -213,7 +213,7 @@ ItemType Posts::getPost(int postIndex)
 	}
 }
 
-ItemType Posts::getUser(int postIndex)
+ItemType Posts::getPostUser(int postIndex)
 {
 	if (size > postIndex)
 	{
@@ -227,5 +227,62 @@ ItemType Posts::getUser(int postIndex)
 	else
 	{
 		return "0";
+	}
+}
+
+ItemType Posts::getReply(int postIndex, int replyIndex)
+{
+	if (size > postIndex)
+	{
+		Node* current = firstNode;
+		for (int i = 0; i < postIndex; i++)
+		{
+			current = current->next;
+		}
+		return current->replyNode->getReply(replyIndex);
+	}
+	else
+	{
+		return "0";
+	}
+}
+
+ItemType Posts::getReplyUser(int postIndex, int replyIndex)
+{
+	if (size > postIndex)
+	{
+		Node* current = firstNode;
+		for (int i = 0; i < postIndex; i++)
+		{
+			current = current->next;
+		}
+		return current->replyNode->getUser(replyIndex);
+	}
+	else
+	{
+		return "0";
+	}
+}
+
+int Posts::getPostLength()
+{
+	return size;
+}
+
+int Posts::getReplyLength(int postIndex)
+{
+	if (size > postIndex)
+	{
+		Node* current = firstNode;
+		for (int i = 0; i < postIndex; i++)
+		{
+			current = current->next;
+		}
+		return current->replyNode->getReplyLength();
+
+	}
+	else
+	{
+		return 0;
 	}
 }

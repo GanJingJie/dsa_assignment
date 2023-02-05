@@ -54,10 +54,23 @@ public:
 	// check if dictionary is empty
 	bool isEmpty();
 	// return int of dictionary length
-	int getLength();
+	int getTopicLength();
 	//get the topic string
 	ItemType getTopic(int topicIndex);
-	//get the user string
-	ItemType getUser(int topicIndex);
+	//get the user string for topics
+	ItemType getTopicUser(int topicIndex);
+	//get the post string
+	ItemType getPost(int topicIndex, int postIndex);
+	//get the user string from post
+	ItemType getPostUser(int topicIndex, int postIndex);
+	//get the reply string 
+	ItemType getReply(int topicIndex, int postIndex, int replyIndex);
+	//get the user string from reply
+	ItemType getReplyUser(int topicIndex, int postIndex, int replyIndex);
+	//get length of post selected
+	int getPostLength(int topicIndex);
+	//get length of reply from post selected
+	int getReplyLength(int topicIndex, int postIndex);
+
 
 };

@@ -236,7 +236,7 @@ bool List::isEmpty()
 	return false;
 }
 
-int List::getLength()
+int List::getTopicLength()
 {
 	return size;
 }
@@ -258,7 +258,7 @@ ItemType List::getTopic(int topicIndex)
 	}
 }
 
-ItemType List::getUser(int topicIndex)
+ItemType List::getTopicUser(int topicIndex)
 {
 	if (size > topicIndex)
 	{
@@ -272,5 +272,109 @@ ItemType List::getUser(int topicIndex)
 	else
 	{
 		return "0";
+	}
+}
+
+ItemType List::getPost(int topicIndex, int postIndex)
+{
+	if (size > topicIndex)
+	{
+		Node* current = firstNode;
+		for (int i = 0; i < topicIndex; i++)
+		{
+			current = current->next;
+		}
+		return current->postNode->getPost(postIndex);
+	}
+	else
+	{
+		return "0";
+	}
+}
+
+ItemType List::getPostUser(int topicIndex, int postIndex)
+{
+	if (size > topicIndex)
+	{
+		Node* current = firstNode;
+		for (int i = 0; i < topicIndex; i++)
+		{
+			current = current->next;
+		}
+		return current->postNode->getPostUser(postIndex);
+	}
+	else
+	{
+		return "0";
+	}
+}
+
+ItemType List::getReply(int topicIndex, int postIndex, int replyIndex)
+{
+	if (size > topicIndex)
+	{
+		Node* current = firstNode;
+		for (int i = 0; i < topicIndex; i++)
+		{
+			current = current->next;
+		}
+		return current->postNode->getReply(postIndex, replyIndex);
+	}
+	else
+	{
+		return "0";
+	}
+}
+
+ItemType List::getReplyUser(int topicIndex, int postIndex, int replyIndex)
+{
+	if (size > topicIndex)
+	{
+		Node* current = firstNode;
+		for (int i = 0; i < topicIndex; i++)
+		{
+			current = current->next;
+		}
+		return current->postNode->getReplyUser(postIndex, replyIndex);
+	}
+	else
+	{
+		return "0";
+	}
+}
+
+int List::getPostLength(int topicIndex)
+{
+	if (size > topicIndex)
+	{
+		Node* current = firstNode;
+		for (int i = 0; i < topicIndex; i++)
+		{
+			current = current->next;
+		}
+		return current->postNode->getPostLength();
+
+	}
+	else
+	{
+		return 0;
+	}
+}
+
+int List::getReplyLength(int topicIndex, int postIndex)
+{
+	if (size > topicIndex)
+	{
+		Node* current = firstNode;
+		for (int i = 0; i < topicIndex; i++)
+		{
+			current = current->next;
+		}
+		return current->postNode->getReplyLength(postIndex);
+
+	}
+	else
+	{
+		return 0;
 	}
 }
