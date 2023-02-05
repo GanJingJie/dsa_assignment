@@ -71,20 +71,23 @@ void deletePost() {
 
 void createPost(string username) 
 {
-    string post, option;
+    string post, option, postStr;
     cout << "=============Post=============" << endl;
     cout << "Enter your post:" << endl;
     getline(cin, post);
 
-    //postList.add(post, username);
-    //postList.printPost();
+    cout << "Enter your post:" << endl;
+    getline(cin, postStr);
+    topicList.add(postStr, username);
+    cout << "" << endl;
+    cout << "Your post has be added" << endl;
 
     bool inPost = true;
     while (inPost)
     {
         cout << endl;
         cout << "1. Add another post" << endl;
-        cout << "2. go back to View all topics" << endl;
+        cout << "2. Go back to view all topics" << endl;
         cout << "What would you like to do: ";
         getline(cin, option);
         
@@ -110,13 +113,13 @@ void createPost(string username)
 
 void createTopic(string username) {
 
-    string topicName;
+    bool inTopic = true;
+    string topicName, option;
     cout << "Enter topic name: ";
     getline(cin, topicName);
     topicList.add(topicName, username);
 
-    bool inTopic = true;
-    string option;
+
     while (inTopic)
     {
         cout << "------------TOPIC------------" << endl;
@@ -182,20 +185,21 @@ void viewTopics(string username) {
     }
 }
 
-void viewReply(int index)
+void viewReply(int topicIndex, int postIndex)
 {
-    string choice;
+    string choice, reply;
     bool success = true;
-    string reply;
 
     while (success)
     {
         //printing of post and the replies
-        topicList.printReply(index);//this first print out the post then the replies.
+        topicList.printPostReply(topicIndex, postIndex);//this first print out the post then the replies.
 
+        cout << "------------ MENU ------------" << endl;
         cout << "1.Add reply" << endl;
         cout << "2.Delete reply" << endl;
         cout << "3.Back" << endl;
+        cout << "------------------------------" << endl;
         cin >> choice;
         cin.ignore(numeric_limits<streamsize>::max(), '\n');
 
@@ -204,9 +208,7 @@ void viewReply(int index)
             string replyStr;
             cout << "Enter your reply:" << endl;
             getline(cin, replyStr);
-
         }
-        
     }
 }
 
@@ -220,7 +222,9 @@ void viewPost(int index, string username)
     {
         //printing of the all the posts
         cout << "-----------POSTS-----------" << endl;
-        topicList.printTopicPost();
+        for (int i = 0; i < topicList.getLength(); i++){
+            topicList.printTopicPost(i);
+        }
         cout << "---------------------------" << endl;
 
         //listing all the options
@@ -236,18 +240,13 @@ void viewPost(int index, string username)
             //what happens to each options
             if (choice == "1")
             {
-                string postStr;
-                cout << "Enter your post:" << endl;
-                getline(cin, postStr);
-                topicList.addPost(postStr, username);
-                cout << "" << endl;
-                cout << "Your post has be added" << endl;
+                createPost(username);
                 success = true;
             }
 
             else if (choice == "2")//call a method to view the post and replies along with its options
             {
-                //viewReply
+                viewReply(index, stoi(choice));
             }
 
             else if (choice == "3")//call delete method
@@ -261,15 +260,15 @@ void viewPost(int index, string username)
     }
 }
 
-void showReplies(int index, string username)
-{
-    int choice;
-    bool success = true;
-    cout << "-----------POSTS-----------" << endl;
-    topicList.printPost();
-    cout << "---------------------------" << endl;
-
-}
+//void showReplies(int index, string username)
+//{
+//    int choice;
+//    bool success = true;
+//    cout << "-----------POSTS-----------" << endl;
+//    topicList.printPost();
+//    cout << "---------------------------" << endl;
+//
+//}
 
 void ForumPage(string username) {
     bool success = true;
