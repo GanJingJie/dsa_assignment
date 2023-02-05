@@ -5,6 +5,7 @@
 #include "List.h"
 #include "Posts.h"
 #include "Reply.h"
+
 using namespace std;
 
 void getPassword();
@@ -144,16 +145,18 @@ void viewTopics(string username) {
         cin >> choice;
         cin.ignore(numeric_limits<streamsize>::max(), '\n');
 
-        if (choice == "1") {
-            viewPost(stoi(choice), username);
+        if (isNumeric(choice)){
+            if (choice == "1") {
+                viewPost(stoi(choice), username);
+            }
+
+            else if (choice == "0") {
+                success = 0;//break the loop and return to the previous method.
+            }
         }
 
-        else if (choice == "0") {
-            success = 0;//break the loop and return to the previous method.
-        }
-        else
-        {
-            success = 1;//continue the loop
+        else {
+            cout << "Please input a valid option" << endl;
         }
     }
 }
@@ -180,8 +183,6 @@ void viewReply(int index)
             string replyStr;
             cout << "Enter your reply:" << endl;
             getline(cin, replyStr);
-
-
 
         }
         
@@ -210,30 +211,33 @@ void viewPost(int index, string username)
         cin >> choice;
         cin.ignore(numeric_limits<streamsize>::max(), '\n');
 
-        //what happens to each options
-        if (choice == "1")
-        {
-            string postStr;
-            cout << "Enter your post:" << endl;
-            getline(cin, postStr);
-            topicList.addPost(postStr, username);
-            cout << "" << endl;
-            cout << "Your post has be added" << endl;
-            success = true;
-        }
+        if (isNumeric(choice)){
+            //what happens to each options
+            if (choice == "1")
+            {
+                string postStr;
+                cout << "Enter your post:" << endl;
+                getline(cin, postStr);
+                topicList.addPost(postStr, username);
+                cout << "" << endl;
+                cout << "Your post has be added" << endl;
+                success = true;
+            }
 
-        else if (choice == "2")//call a method to view the post and replies along with its options
-        {
-            //viewReply
-        }
+            else if (choice == "2")//call a method to view the post and replies along with its options
+            {
+                //viewReply
+            }
 
-        else if (choice == "3")//call delete method
-        {
-            deletePost();
+            else if (choice == "3")//call delete method
+            {
+                deletePost();
+            }
         }
-
+        else {
+            cout << "Please input a valid option" << endl;
+        }
     }
-
 }
 
 void showReplies(int index, string username)
@@ -259,13 +263,14 @@ void ForumPage(string username) {
         cin >> choice;
         cin.ignore(numeric_limits<streamsize>::max(), '\n');
 
-        if (choice == "1") {
-            viewTopics(username);
-        }
+        if (isNumeric(choice)){
+            if (choice == "1") {
+                viewTopics(username);
+            }
 
-        else if (choice == "2") {
-            createTopic(username);
-        }
+            else if (choice == "2") {
+                createTopic(username);
+            }
 
             else if (choice == "0") {
                 username = "";
@@ -275,7 +280,6 @@ void ForumPage(string username) {
                 main();
             }
         }
-
         else
         {
             cout << "Invalid option please try again" << endl;
