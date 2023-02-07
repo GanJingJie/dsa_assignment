@@ -74,13 +74,10 @@ void createPost(string username, int topicIndex)
     string post, option, postStr;
     cout << "=============Post=============" << endl;
     cout << "Enter your post:" << endl;
-    getline(cin, post);
-
-    cout << "Enter your post:" << endl;
     getline(cin, postStr);
     topicList.addPost(topicIndex, postStr, username);
     cout << "" << endl;
-    cout << "Your post has be added" << endl;
+    cout << "Your post has been added" << endl;
 
     bool inPost = true;
     while (inPost)
@@ -94,7 +91,7 @@ void createPost(string username, int topicIndex)
         if (isNumeric(option)){
             if (option == "1")
             {
-                createPost(username, topicIndex);
+                createPost(username, topicIndex - 1);
                 inPost = false;
             }
 
@@ -127,6 +124,7 @@ void createTopic(string username) {
         cout << "1. Add post" << endl;
         cout << "2. Back to previous menu" << endl;
         cout << "----------------------------" << endl;
+        cout << "Your choice: ";
         cin >> option;
         cin.ignore(numeric_limits<streamsize>::max(), '\n');
 
@@ -245,9 +243,9 @@ void viewPost(int index, string username)
     {
         //printing of the all the posts
         cout << "-----------POSTS-----------" << endl;
-        for (int i = 0; i < topicList.getTopicLength(); i++){
-            topicList.printTopicPost(i);
-        }
+        //for (int i = 0; i < topicList.getTopicLength(); i++){
+            topicList.printTopicPost(index);
+        //}
         cout << "---------------------------" << endl;
 
         //listing all the options
