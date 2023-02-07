@@ -53,7 +53,7 @@ public:
 	void printPostReply(int topicIndex, int postIndex);
 	// check if linked list is empty
 	bool isEmpty();
-	// return int of dictionary length
+	// return int of linked list length
 	int getTopicLength();
 	//get the topic string
 	ItemType getTopic(int topicIndex);

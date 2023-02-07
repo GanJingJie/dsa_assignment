@@ -9,7 +9,7 @@
 using namespace std;
 
 void getPassword();
-void Register();
+void Register(string username, string password);
 void logIn();
 void viewPost(int index, string username);
 int main();
@@ -69,7 +69,7 @@ void deletePost() {
 }
 
 
-void createPost(string username) 
+void createPost(string username, int topicIndex) 
 {
     string post, option, postStr;
     cout << "=============Post=============" << endl;
@@ -78,7 +78,7 @@ void createPost(string username)
 
     cout << "Enter your post:" << endl;
     getline(cin, postStr);
-    topicList.add(postStr, username);
+    topicList.addPost(topicIndex, postStr, username);
     cout << "" << endl;
     cout << "Your post has be added" << endl;
 
@@ -94,7 +94,7 @@ void createPost(string username)
         if (isNumeric(option)){
             if (option == "1")
             {
-                createPost(username);
+                createPost(username, topicIndex);
                 inPost = false;
             }
 
@@ -133,7 +133,7 @@ void createTopic(string username) {
         if (isNumeric(option)){
             if (option == "1")
             {
-                createPost(username);
+                createPost(username, stoi(option));
                 inTopic = false;
             }
 
@@ -171,7 +171,7 @@ void whichTopic(string username) {
 }
 
 void viewTopics(string username) {
-    string choice = 0;
+    string choice = "0";
     bool success = 1;
 
     cout << "----------- TOPICS -----------" << endl;
@@ -216,7 +216,7 @@ void viewReply(int topicIndex, int postIndex)
     while (success)
     {
         //printing of post and the replies
-        topicList.printPostReply(topicIndex, postIndex);//this first print out the post then the replies.
+        topicList.printPostReply(topicIndex, postIndex); //this first print out the post then the replies.
 
         cout << "------------ MENU ------------" << endl;
         cout << "1.Add reply" << endl;
@@ -245,7 +245,7 @@ void viewPost(int index, string username)
     {
         //printing of the all the posts
         cout << "-----------POSTS-----------" << endl;
-        for (int i = 0; i < topicList.getLength(); i++){
+        for (int i = 0; i < topicList.getTopicLength(); i++){
             topicList.printTopicPost(i);
         }
         cout << "---------------------------" << endl;
@@ -263,7 +263,8 @@ void viewPost(int index, string username)
             //what happens to each options
             if (choice == "1")
             {
-                createPost(username);
+
+                createPost(username, index);
                 success = true;
             }
 
@@ -284,8 +285,8 @@ void viewPost(int index, string username)
 }
 
 void ForumPage(string username) {
-    bool success = true;
-    string choice = 0;
+    bool success = 1;
+    string choice = "0";
     while (success){
         cout << "------------ MENU ------------" << endl;
         cout << "1. View All Topics" << endl;
@@ -308,11 +309,12 @@ void ForumPage(string username) {
             else if (choice == "0") {
                 username = "";
                 password = "";
-                success = false;
+                success = 0;
                 cout << "Log out successful!" << endl;
                 main();
             }
         }
+
         else
         {
             cout << "Invalid option please try again" << endl;
@@ -320,12 +322,12 @@ void ForumPage(string username) {
     }
 }
 
-void loginSuccessful() {
+void loginSuccessful(string username) {
     cout << "Log In Successful!" << endl << endl;
     ForumPage(username);
 }
 
-void logInCheck() {
+void logInCheck(string username) {
     fileName = "Usernames.txt";
     read.open(fileName);
     bool success = 0;
@@ -354,7 +356,7 @@ void logInCheck() {
             if (password == Password) {
                 loggedIn = 1;
                 passwordTries = 0;
-                loginSuccessful();
+                loginSuccessful(username);
             }
             else {
                 cout << "Incorrect Password!" << endl;
@@ -383,17 +385,17 @@ void getPassword() {
 
 void logIn() {
     cout << "Please enter your username: ";
-    cin >> username;
-    logInCheck();
+    getline(cin, username);
+    logInCheck(username);
 }
 
-void Register() {
+void Register(string username, string password) {
     bool same = true;
     bool success = 0;
     while (same) {
         fileName = "Usernames.txt";
         cout << "Please enter a username: ";
-        cin >> username;
+        getline(cin, username);
 
         // Opening file to check if it exists
         read.open(fileName);
@@ -416,7 +418,7 @@ void Register() {
 
     while (success) {
         cout << "Please enter a password: ";
-        cin >> password;
+        getline(cin, password);
         if (password.length() < 8) {
             cout << "Your password must be more than 8 characters long!" << endl;
             continue;
@@ -478,8 +480,6 @@ void savePosts()
             write << topicList.getPost(t, postLen) << '\t';
             write << topicList.getPostUser(t, postLen) << endl;
         }
-
-
     }
     write.close();
     
@@ -529,7 +529,7 @@ int main()
 
         if (isNumeric(opt)){
             if (opt == "1") {
-                Register();
+                Register(username, password);
                 opt = "0";
             }
 
